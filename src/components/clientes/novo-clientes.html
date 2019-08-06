@@ -1,0 +1,196 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12">
+            <p>Comercial > Cliente > Novo Cliente</p>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Novo Cliente</h4>
+                <small class="text-info">Preencha os campos abaixo para cadastrar um novo cliente.</small>
+            </div>
+            <div class="card-body">
+                <form onsubmit="return salvarcliente(event)">
+                    <div class="form-group">
+                        <label for="razaosocial">Razão Social</label>
+                        <input type="text" class="form-control" id="razaosocial" placeholder="Insira o Razão Social">
+                    </div>
+                    <div class="form-group">
+                        <label for="nomefantasia">Nome Fantasia</label>
+                        <input type="text" class="form-control" id="nomefantasia" placeholder="Insira o Nome Fantasia" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cnpj">
+                                CNPJ
+                            </label>
+                        <input type="text" class="form-control cnpj" id="cnpj" placeholder="Infome seu CNPJ">
+                    </div>
+                    <div class="form-group">
+                        <label for="nomeresponsavel">Responsável</label>
+                        <input type="text" class="form-control" id="nomeresponsavel" placeholder="Insira o Responsável" required>
+                    </div>
+                    <div class="row d-flex align-self-center">
+                        <div class="col-10 form-group" style="margin: 0;">
+                            <label for="nomeavaliada">Nome da empresa avaliada</label><br />
+                            <input type="text" class="form-control" id="nomeavaliada" placeholder="Insira o nome da empresa avaliada">
+                        </div>
+                        <div class="col-1">
+                            <p class="text-center" style="line-height: 125%; font-size: 75%">Mesma empresa contratada?
+                            </p>
+                        </div>
+                        <div class="col-1 form-check form-group">
+                            <input class="form-check-input form-control" type="checkbox" value="" id="mesmonome" alt="Mesma empresa contratante" checked=true>
+                        </div>
+                    </div>
+                    <div class="form-group" style="line-height:100%">
+                        <small>Para inserir mais de uma empresa a ser avaliada, separe os nomes por vírgulas.</small><br />
+                        <small>Ex: Empresa 1, Empresa 2, Empresa 3</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="text" class="form-control telefone" id="telefone" placeholder="Insira o Telefone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Insira o email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="site">Site</label>
+                        <input type="text" class="form-control Site" id="site" placeholder="Insira o Site">
+                    </div>
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" id="salvar" value="Salvar">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/bdaea6cd67.js"></script>
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+
+<script>
+    $(function() {
+        $("#nomefantasia, #mesmonome").on("change", function() {
+            var mesmo = document.getElementById("mesmonome").checked
+            if (mesmo) {
+                $("#nomeavaliada").val($("#nomefantasia").val())
+            }
+        })
+    })
+
+    function salvarcliente(e) {
+
+        e.preventDefault()
+
+        $("#salvar").attr("disabled", true)
+
+        // Para pegar todos os dados preenchidos
+        var razaosocial = $("#razaosocial").val()
+        var nomefantasia = $("#nomefantasia").val()
+        var cnpj = $("#cnpj").val()
+        var nomeresponsavel = $("#nomeresponsavel").val()
+        var nomeavaliada = $("#nomeavaliada").val()
+        var telefone = $("#telefone").val()
+        var email = $("#email").val()
+        var site = $("#site").val()
+
+
+
+        var array1 = [razaosocial, nomefantasia, cnpj, nomeresponsavel, nomeavaliada, telefone, email, site]
+
+        function success() {
+            $("#salvar").attr("disabled", false)
+            alert("Cliente Salvo")
+
+            // Para limpar o form
+            $("#razaosocial").val("")
+            $("#nomefantasia").val("")
+            $("#cnpj").val("")
+            $("#nomeresponsavel").val("")
+            $("#nomeavaliada").val("")
+            $("#telefone").val("")
+            $("#email").val("")
+            $("#site").val("")
+        }
+
+        function failure() {
+            $("#salvar").attr("disabled", false)
+            alert("Erro em salvar cliente")
+        }
+
+        google.script.run.withSuccessHandler(success).withFailureHandler(failure).addCliente(array1)
+
+        return false
+    }
+
+    $(function() {
+        var CNPJmask = [{
+            "mask": "###.###.###/####-##"
+        }];
+        $('.cnpj').inputmask({
+            mask: CNPJmask,
+            greedy: false,
+            definitions: {
+                '#': {
+                    validator: "[0-9]",
+                    cardinality: 1
+                }
+            }
+        });
+    });
+
+    // Corrigir para aceitar varios tipos de telefone
+    // $(function () {
+    //     $('.telefone').inputmask({
+    //         mask: ["(###) #####-####","(##) #####-####","(###) ####-####","(##) ####-####","## (##) ####-####","## (##) #####-####"],
+    //         greedy: true,
+    //         keepStatic: true,
+    //         definitions: { '#': { validator: "[0-9]", cardinality: 1 } }
+    //     });
+    // });
+
+    function navegar(pagina) {
+        google.script.run.withSuccessHandler(changePage).newPage(pagina)
+    }
+
+    function changePage(page) {
+        document.open(); //should work fine without this
+        document.write(page);
+        document.close(); //should work fine without this
+    }
+
+    document.querySelectorAll('[icp-link]').forEach(link => {
+        const url = link.attributes['icp-link'].value
+        link.onclick = e => {
+            e.preventDefault()
+            navegar(url)
+        }
+    })
+
+    $(function() {
+        $('#valorass,#valorent').on("change", function() {
+            let valor = numeral($('#valorass').val()).value() + numeral($('#valorent').val()).value()
+            $('#valortotal').val(numeral(valor).format('$0,0.00'))
+        })
+    })
+
+    $(function() {
+        $('#impostos').on("change", function() {
+            let val = $('#impostos').val()
+            let imp = $('#resultadoimposto')
+            if (val == "com") {
+                imp.html("Os honorários descritos acima são líquidos de PIS (0,65%), COFINS (3,0%) e ISS (5%). Portanto, a empresa contratante pagará à Investor o valor bruto dos serviços.")
+            } else {
+                imp.html("Os referidos honorários abrangem todos os tributos (impostos, taxas, emolumentos, contribuições fiscais e parafiscais).")
+            }
+        })
+    })
+</script>
