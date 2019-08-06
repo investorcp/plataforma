@@ -6,6 +6,12 @@
        navegar("novoCliente")
    })
 
+   $("#cliente").on("click", function() {
+       $.get("src/components/Clientes/clientes.html", function(data) {
+           $("#body").html(data)
+       })
+   })
+
    $(function() {
        $('.input-data').datepicker({
            format: 'dd/mm/yyyy'
