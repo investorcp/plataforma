@@ -4,7 +4,6 @@ $("body").delegate("#newPropose", "click", function() {
 
 $("body").delegate("#newClient", "click", function() {
     $.get("src/components/clientes/novo-clientes.html", function(data) {
-        window.history.pushState(data, "Plataforma Investor", "src/components/clientes/novo-clientes.html")
         $("#body").html(data)
     })
 })
