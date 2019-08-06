@@ -1,0 +1,66 @@
+.bg-roxo {
+    background-color: rgb(19, 40, 78);
+}
+
+.ft-cinza {
+    color: rgb(217, 217, 217);
+}
+
+.ft-cinza:hover {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.user {
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 50%;
+    border-color: rgb(217, 217, 217);
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    padding: 0%;
+}
+
+.user-img {
+    width: auto;
+    max-height: 100%;
+}
+
+
+/* .girar:hover{
+-webkit-animation: spin 4s infinite linear;
+}
+
+@-webkit-keyframes spin {
+    0%  {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(360deg);}   
+} */
+
+.p-22 {
+    padding: 0%;
+    height: 45px !important;
+    line-height: 50% !important;
+}
+
+body {
+    line-height: 50% !important;
+}
+
+li {
+    line-height: 50% !important;
+}
+
+#prin {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+.card-header-icp {
+    line-height: 130% !important;
+}
