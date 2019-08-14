@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Teste aqui né?</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/locales/pt-br.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArffpRRcX7uR27n-g_CrYsQk_ZlFT9_iw&libraries=places"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
+    <script src="https://kit.fontawesome.com/bdaea6cd67.js"></script>
+</head>
+
+<body>
+    <h1>Contar quanto tempo até determinado período</h1>
+    <p id="timeA">Contado tempo: </p>
+    <button class="btn btn-primary" id="btn" onclick="addTime()">Clique aqui</button>
+    <br>
+    <label id="timeB"></label><br>
+    <label id="timeC"></label><br>
+    <label id="timeD"></label>
+    <div>
+        <div class="tarefa" style="display: inline-block;padding: 15px;margin: 10px; background-color: bisque; border-radius: 15px" lastTime=0 start=0 timeStart="">
+            <p></p>
+            <button class="btn btn-primary" onclick="addTime2(event)" id="btn1"><i onclick="addTime1(event)"
+                    class="fas fa-play"></i><span onclick="addTime1(event)"> Start</span></button>
+            <button class="btn btn-success" onclick="addTime2(event)" id="btn1"><i onclick="addTime1(event)"
+                    class="fas fa-paper-plane"></i><span onclick="addTime1(event)"> Entregar</span></button>
+        </div>
+        <div class="tarefa" style="display: inline-block;padding: 15px;margin: 10px; background-color: bisque; border-radius: 15px" lastTime=0 start=0 timeStart="">
+            <p></p>
+            <button class="btn btn-primary" onclick="addTime2(event)" id="btn1"><i onclick="addTime1(event)"
+                    class="fas fa-play"></i><span onclick="addTime1(event)"> Start</span></button>
+            <button class="btn btn-success" onclick="addTime2(event)" id="btn1"><i onclick="addTime1(event)"
+                    class="fas fa-paper-plane"></i><span onclick="addTime1(event)"> Entregar</span></button>
+        </div>
+        <div class="tarefa" style="display: inline-block;padding: 15px;margin: 10px; background-color: bisque; border-radius: 15px" lastTime=0 start=0 timeStart="">
+            <p></p>
+            <button class="btn btn-primary" onclick="addTime2(event)" id="btn1"><i onclick="addTime1(event)"
+                    class="fas fa-play"></i><span onclick="addTime1(event)"> Start</span></button>
+            <button class="btn btn-success" onclick="addTime2(event)" id="btn1"><i onclick="addTime1(event)"
+                    class="fas fa-paper-plane"></i><span onclick="addTime1(event)"> Entregar</span></button>
+        </div>
+        <div class="tarefa" style="display: inline-block;padding: 15px;margin: 10px; background-color: bisque; border-radius: 15px" lastTime=0 start=0 timeStart="">
+            <p></p>
+            <button class="btn btn-primary" onclick="addTime2(event)" id="btn1"><i onclick="addTime1(event)"
+                    class="fas fa-play"></i><span onclick="addTime1(event)"> Start</span></button>
+            <button class="btn btn-success" onclick="" id="btn1"><i onclick=""
+                    class="fas fa-paper-plane"></i><span onclick=""> Entregar</span></button>
+        </div>
+    </div>
+</body>
+
+<script>
+    var time = new Date()
+    $(function() {
+        $("#timeB").append(time)
+    })
+
+    $(function() {
+        setInterval(function() {
+            var time2 = new Date()
+            $("#timeC").html(time2)
+            var diff = Math.round((time2 - time) / 100) / 10
+            $("#timeD").html(`${diff}`)
+
+            $(".tarefa").each(function(x) {
+                var tar = $(".tarefa")[x]
+                atualizarLastTime(tar)
+            })
+        }, 100)
+    })
+
+    function atualizarLastTime(tar) {
+        var valor = $(tar)
+        var start = $(valor).attr("start")
+        var bc = msToTime(parseFloat($(tar).attr("lastTime")) * 1000)
+        $($(tar).children()[0]).html(bc)
+        if (start == "1") {
+            var agr = parseFloat($("#timeD").html())
+            var d0 = parseFloat($(valor).attr("timeStart"))
+            $(valor).attr("timeStart", agr)
+            var diff = agr - d0
+            var aa = parseFloat($(valor).attr("lastTime")) + diff
+            $(valor).attr("lastTime", aa)
+            var ab = msToTime(parseFloat($(valor).attr("lastTime")) * 1000)
+            $($(valor).children()[0]).html(ab)
+        }
+    }
+
+    function addTime() {
+        var time2 = new Date()
+            // var diff = Math.round((time2 - time) / 100) / 10
+        var diff = (time2 - time) / 1000
+        $("#timeA").append(`<br> ${diff}`)
+    }
+
+    function addTime1(event) {
+        var btn = $(event.target).parent()[0]
+        var pai = $(btn).parent()[0]
+
+        if ($(pai).attr("start") == 0) {
+            play(pai)
+        } else {
+            pause(pai)
+        }
+    }
+
+    function play(pai) {
+        var btn = $(pai).children(".btn")[0]
+        var filhos = $(btn).children()
+        $(".tarefa").each(function(x) {
+            pause($($(".tarefa")[x]))
+        })
+        $(pai).attr("start", 1)
+        $(pai).attr("timeStart", $("#timeD").html())
+        $(filhos[0]).removeClass("fa-play")
+        $(filhos[0]).addClass("fa-pause")
+        $(filhos[1]).html(" Pause")
+    }
+
+    function pause(pai) {
+        var btn = $(pai).children(".btn")[0]
+        var filhos = $(btn).children()
+        $(pai).attr("start", 0)
+        $(pai).attr("timeStart", "")
+        $(filhos[0]).addClass("fa-play")
+        $(filhos[0]).removeClass("fa-pause")
+        $(filhos[1]).html(" Play")
+    }
+
+    function addTime2(event) {
+        var btn = $(event.target)
+        var pai = $(btn).parent()[0]
+        var filhos = $(btn).children()
+
+        if ($(pai).attr("start") == 0) {
+            play(pai)
+        } else {
+            pause(pai)
+        }
+    }
+
+    function msToTime(duration) {
+        var milliseconds = parseInt((duration % 1000) / 100),
+            seconds = Math.floor((duration / 1000) % 60),
+            minutes = Math.floor((duration / (1000 * 60)) % 60),
+            hours = Math.floor((duration / (1000 * 60 * 60)));
+
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+    }
+</script>
+
+</html>

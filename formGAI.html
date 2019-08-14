@@ -1,0 +1,849 @@
+<!-- Desenvolvido por Paulo Moisés. Em dúvidas sobre a edição, entre em contato pelo site: www.paulomoises.com ou pelo email: paulomoises_silva@hotmail.com -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/locales/pt-br.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArffpRRcX7uR27n-g_CrYsQk_ZlFT9_iw&libraries=places"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
+<div class="card">
+    <div class="card-header">
+        <h4>Nova Proposta Gestão do Ativo Imobilizado (GAI)</h4>
+        <small class="text-info">Preencha os campos abaixo para construir a proposta de orçamento do
+            cliente.</small>
+    </div>
+    <div id="forms" class="card-body">
+        <form id="gaiform" onsubmit="return novaProposta(event)">
+            <div class="mini-card card">
+                <h5 class="titulo">Dados do Cliente</h5>
+                <div>
+                    <div class="form-group">
+                        <label for="codigoproposta">Código da Proposta</label>
+                        <input type="text" class="form-control" id="codigoproposta" placeholder="Insira o código da proposta" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nomefantasia">Nome da Empresa</label>
+                        <input type="text" class="form-control" id="nomefantasia" placeholder="Insira o Nome da Empresa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="saudacao">Saudação</label>
+                        <select class="form-control" id="saudacao" required>
+                            <option disabled selected>Selecione</option>
+                            <option>Sr.</option>
+                            <option>Sra.</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nomecliente">Nome do Cliente</label>
+                        <input type="text" class="form-control" id="nomecliente" placeholder="Insira o Nome do Cliente" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cidadeproposta">Nome da Cidade</label>
+                        <input type="text" class="form-control" id="cidadeproposta" value="Belo Horizonte" placeholder="Insira o Nome da Cidade" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="datafundacao">Data da Proposta</label>
+                        <input type='text' class="form-control input-data hoje" id='datafundacao' required>
+                    </div>
+                    <div class="btn btn-primary btn-block" onclick="next1(event)">Tudo certo. Próximo</div>
+                </div>
+            </div>
+            <div class="mini-card card">
+                <h5 class="titulo">Detalhes do Orçamento</h5>
+                <div style="display: none;">
+                    <div for="finsp" class="form-group mini-card">
+                        <label for="finsp" class="font-weight-bold">Fins da Proposta</label>
+                        <input type="text" class="form-control" id="finsp" placeholder="Insira os fins dessa proposta para uso interno">
+                    </div>
+                    <div class="mini-card">
+                        <label class="font-weight-bold">Itens a ser incluído na proposta de orçamento</label>
+                        <div class="form-group">
+                            <div class="mini-card">
+                                <label class="font-weight-bold">Inclui emplaquetamento?</label>
+                                <div class="radio">
+                                    <label><input id="inventComEmplaq" type="radio" name="optradio" value="com">
+                                        Inventário dos bens do ativo
+                                        fixo, com emplaquetamento, fotografia por classe de bens e identificação da
+                                        correta
+                                        localização dos mesmos.</label>
+                                    <label><input id="inventSemEmplaq" type="radio" name="optradio" value="sem">
+                                        Inventário dos bens do ativo
+                                        fixo, sem emplaquetamento, fotografia por classe de bens e identificação da
+                                        correta
+                                        localização dos mesmos.</label>
+                                </div>
+                            </div>
+                            <div class="mini-card">
+                                <label class="font-weight-bold">Outros Itens</label>
+                                <div class="checkbox">
+                                    <label><input id="checkValorJusto" class="checkbox-icp" type="checkbox" value="1">
+                                        Determinação do valor
+                                        justo de mercado item
+                                        a item.</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input id="checkRVU" class="checkbox-icp" type="checkbox" value="2"> Revisão
+                                        de vidas úteis (vida
+                                        útil
+                                        econômica,
+                                        decorrida e remanescente).</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input id="checkValorResidual" class="checkbox-icp" type="checkbox"
+                                            value="3"> Cálculo do valor residual e estimativa das
+                                        novas taxas de depreciação.</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input id="checkConciliacao" class="checkbox-icp" type="checkbox" value="4">
+                                        Conciliação físico x contábil x
+                                        sistêmica.</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input id="checkTesteImpairment" class="checkbox-icp" type="checkbox"
+                                            value="5"> Teste de
+                                        Impairment.</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input id="checkBenfeitoria" class="checkbox-icp" type="checkbox" value="6">
+                                        Avaliação em benfeitorias de
+                                        terceiros.</label>
+                                </div>
+                                <div class="checkbox row">
+                                    <label class="col-4 col-lg-1 col-md-2 col-sm-3"><input for="outrositens"
+                                            id="checkOutros" class="checkbox-icp" type="checkbox" value="7">
+                                        Outro
+                                    </label>
+                                    <input placeholder="Insira outro item" id="checkOutrosValor" type="text" class="form-control col-8 col-lg-11 col-md-10 col-sm-9" id="outrositens">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mini-card">
+                        <p class="font-weight-bold">Sobre o inventário</p>
+                        <div class="form-group">
+                            <label for="TouP">Tipo de Serviço de Inventário</label>
+                            <select class="form-control" id="TouP" required>
+                                <option value="SELECIONE" disabled selected>Selecione</option>
+                                <option value="total">Total</option>
+                                <option value="parcial">Parcial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="complementoTC">Complemento</label>
+                            <input type="text" value="desde o inventário físico e emplaquetamento até a revisão de vidas úteis e avaliação" class="form-control" id="complementoTC" placeholder="Insira o complemento">
+                        </div>
+                        <p id="infoInventario" class="text-muted mini-card">Previa do texto aparecerá aqui</p>
+                    </div>
+                    <div class="mini-card">
+                        <p class="font-weight-bold">Descrição do Investimento</p>
+                        <label for="investimentodescricao">Escreva um parágrafo sobre o investimento</label>
+                        <textarea class="form-control" id="investimentodescricao" placeholder="Escreva um parágrafo sobre o investimento" rows="3" required>Emissão de laudo de avaliação fundamentado, contemplando os bens móveis e imóveis para definição do valor justo, revisão de vidas úteis, conciliação, aplicação do teste de impairment, inventário e emplaquetamento</textarea>
+                    </div>
+                    <div class="mini-card">
+                        <p class="font-weight-bold">Tipo de Serviço</p>
+                        <label for="tipoDeServico">Escreva um sobre o serviço</label>
+                        <textarea class="form-control" id="tipoDeServico" placeholder="Escreva um parágrafo sobre o investimento" rows="3" required>para prestação de serviços de Gestão de seus Ativos Imobilizados e Teste de Redução ao Valor Recuperável dos Ativos (Impairment)</textarea>
+                        <p id="infoTipoDeServico" class="text-muted mini-card">Previa do texto aparecerá aqui</p>
+                    </div>
+                    <div class="mini-card">
+                        <div class="form-group">
+                            <label class="font-weight-bold" for="impostos">Impostos</label>
+                            <select class="form-control" id="impostos" required>
+                                <option disabled selected>Selecione</option>
+                                <option value="com">Valor com imposto</option>
+                                <option value="sem">Valor sem imposto</option>
+                            </select>
+                            <small class="text-info" id="resultadoimposto"></small>
+                        </div>
+                    </div>
+                    <div class="mini-card">
+                        <p class="font-weight-bold">Outras informações</p>
+                        <div class="row">
+                            <div class="form-group col-md-4 col-12">
+                                <label for="diasAposPag">Dias para Pagarmento após início do Inventário</label>
+                                <input type="text" class="form-control" id="diasAposPag" placeholder="Dias" required>
+                                <small class="text-muted" id="infoDiasAposPag"></small>
+                            </div>
+                            <div class="form-group col-md-4 col-12">
+                                <label for="diasEntregaLaudoFinal">Prazo para Entrega do Laudo Final</label>
+                                <input type="text" class="form-control" id="diasEntregaLaudoFinal" placeholder="Valor total inventariante" required>
+                                <small class="text-muted" id="infoDiasEntregaLaudoFinal"></small>
+                            </div>
+                            <div class="form-group col-md-4 col-12">
+                                <label for="incluitranslado">Esta proposta contempla os gastos com traslados?</label>
+                                <select class="form-control" id="incluitranslado" required>
+                                    <option disabled selected>Selecione</option>
+                                    <option value="sim">Sim</option>
+                                    <option value="não">Não</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="enderecoGai">Endereço da empresa</label>
+                                <input type="text" class="form-control" id="enderecoGai" placeholder="Endereço" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mini-card">
+                        <label class="font-weight-bold">Itens que serão Inventariados</label>
+                        <div class="checkbox">
+                            <label><input id="checkMaqEEquip" class="checkbox-icp" type="checkbox" value="1"> Máquinas e
+                                equipamentos</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input id="checkMovEUten" class="checkbox-icp" type="checkbox" value="2"> Móveis e
+                                utensílios</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input id="checkVeiculos" class="checkbox-icp" type="checkbox" value="3">
+                                Veículos</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input id="checkInformatica" class="checkbox-icp" type="checkbox" value="4">
+                                Informática (hardware) e equipamentos eletrônicos</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input id="checkTerrenos" class="checkbox-icp" type="checkbox" value="5">
+                                Terrenos</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input id="checkConstrucoes" class="checkbox-icp" type="checkbox" value="6">
+                                Construções e edificações</label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input id="checkBenfeitoriaTerceiros" class="checkbox-icp" type="checkbox" value="7">
+                                Benfeitorias em imóvel de Terceiros</label>
+                        </div>
+                        <div class="checkbox row">
+                            <label class="col-4 col-lg-1 col-md-2 col-sm-3"><input id="checkOutros2"
+                                    class="checkbox-icp" type="checkbox" value="8">
+                                Outro
+                            </label>
+                            <input id="checkOutros2Valor" placeholder="Insira outro item" type="text" class="form-control col-8 col-lg-11 col-md-10 col-sm-9" id="outrositens">
+                        </div>
+                    </div>
+                    <div class="mini-card">
+                        <div class="form-group col-12">
+                            <label class="font-weight-bold" for="etapa3">Escreva sobre a Etapa 3</label>
+                            <textarea class="form-control" id="etapa3" placeholder="Etapa 3" rows="7" required>Aplicação das metodologias;
+Conciliação físico x contábil;
+Avaliação – do valor recuperável;
+Definição de vidas úteis e vidas úteis econômicas remanescentes;
+Testes de validação;
+Emissão da minuta para aprovação da contratante;
+Entrega da base saneada.</textarea>
+                        </div>
+                    </div>
+                    <div class="btn btn-primary btn-block" onclick="next1(event)">Tudo certo. Próximo</div>
+                </div>
+            </div>
+            <div class="mini-card card">
+                <h5 class="titulo">Dados de Venda</h5>
+                <div style="display: none;">
+                    <div class="mini-card">
+                        <div class="row">
+                            <div class="form-group col-md-6 col-12">
+                                <label for="origemvenda">Origem da Venda</label>
+                                <select class="form-control" id="origemvenda" required>
+                                    <option disabled selected>Selecione</option>
+                                    <option value="comercial1">Comercial 1</option>
+                                    <option value="comercial2">Comercial 2</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6 col-12">
+                                <label for="comousemnota">Conciliação</label>
+                                <select class="form-control" id="comousemnota" required>
+                                    <option value="naopossui" selected>Não foi solicitado</option>
+                                    <option value="comnota">Com Nota</option>
+                                    <option value="semnota">Sem Nota</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3 col-12">
+                                <label for="ninventariantes">Número de Inventariantes</label>
+                                <input type="number" step="1" min="1" value="1" class="form-control" id="ninventariantes" placeholder="Insira o Número de Inventariantes" required>
+                            </div>
+                            <div class="form-group col-md-3 col-12">
+                                <label for="numitens">Número de Itens</label>
+                                <input type="number" step="1" min="0" class="form-control" id="numitens" placeholder="Insira o Número de Itens" required>
+                            </div>
+                            <div class="form-group col-md-3 col-12">
+                                <label for="numitensdia">Número de Itens por dia</label>
+                                <input type="number" step="1" min="0" value="180" class="form-control" id="numitensdia" placeholder="Insira o Número de Itens por dia" required>
+                            </div>
+                            <div class="form-group col-md-3 col-12">
+                                <label for="diasinvent">Número de Dias Úteis de Inventário</label>
+                                <input type="number" step="1" min="0" value="0" class="form-control" id="diasinvent" placeholder="Número de Dias Úteis de Inventário" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6 col-12">
+                                <label for="valordiariainvent">Valor diária do inventariante</label>
+                                <input type="text" class="form-control reais" id="valordiariainvent" placeholder="Valor diária do inventariante" required>
+                            </div>
+                            <div class="form-group col-md-6 col-12">
+                                <label for="valorinvent">Valor total inventariante</label>
+                                <input type="text" class="form-control reais" id="valorinvent" placeholder="Valor total inventariante" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mini-card row">
+                        <div class="form-group col-md-4 col-12">
+                            <label for="aavj">Avaliação a Valor Justo (60%)</label>
+                            <input type="text" class="form-control" id="aavj" placeholder="Avaliação a Valor Justo" readonly>
+                        </div>
+                        <div class="form-group col-md-4 col-12">
+                            <label for="tdi">Teste de Impairment (30%)</label>
+                            <input type="text" class="form-control" id="tdi" placeholder="Teste de Impairment" readonly>
+                        </div>
+                        <div class="form-group col-md-4 col-12">
+                            <label for="rvucpc27">Revisão de Vidas Úteis CPC 27 (40%)</label>
+                            <input type="text" class="form-control" id="rvucpc27" placeholder="Revisão de Vidas Úteis CPC 27" readonly>
+                        </div>
+                        <div class="form-group col-md-6 col-12">
+                            <label for="mdr">Montagem do Relatório (10%)</label>
+                            <input type="text" class="form-control" id="mdr" placeholder="Montagem do Relatório" readonly>
+                        </div>
+                        <div class="form-group col-md-6 col-12">
+                            <label for="coorev">Coordenação / Revisão (25%)</label>
+                            <input type="text" class="form-control" id="coorev" placeholder="Coordenação / Revisão" readonly>
+                        </div>
+                    </div>
+                    <div class="mini-card row">
+                        <div class="form-group col-md-4 col-12">
+                            <label for="layoutcarga">Layout Carga</label>
+                            <input type="text" class="form-control reais" id="layoutcarga" placeholder="Layout Carga">
+                        </div>
+                        <div class="form-group col-md-4 col-12">
+                            <label for="outroscustos">Outros Custos</label>
+                            <input type="text" class="form-control reais" value="250" id="outroscustos" placeholder="Outros Custos">
+                        </div>
+                        <div class="form-group col-md-4 col-12">
+                            <label for="alimentacaotransporte">Alimentação / Transporte</label>
+                            <input type="text" class="form-control reais" id="alimentacaotransporte" placeholder="Alimentação / Transporte">
+                        </div>
+                    </div>
+                    <div class="mini-card row">
+                        <div class="form-group col-md-4 col-12">
+                            <label for="markuppercent">Markup (%)</label>
+                            <input type="number" step="0.1" min="0" value="55" class="form-control percentual" id="markuppercent" placeholder="Percentual de Margem" required>
+                        </div>
+                        <div class="form-group col-md-4 col-12">
+                            <label for="totalcustodireto">Total do Custo Direto</label>
+                            <input type="text" class="form-control reais" id="totalcustodireto" placeholder="Total do Custo Direto" readonly>
+                        </div>
+                        <div class="form-group col-md-4 col-12">
+                            <label for="custopormarkup">Custo / Markup</label>
+                            <input type="text" class="form-control reais" id="custopormarkup" placeholder="Custo / Markup" readonly>
+                        </div>
+                    </div>
+                    <div class="mini-card row">
+                        <div class="form-group col-md-4 col-12">
+                            <label for="backoffice">Custo Fixo de BackOffice</label>
+                            <input type="text" class="form-control reais" id="backoffice" placeholder="Custo Fixo de BackOffice" readonly>
+                        </div>
+                        <div class="form-group col-md-4 col-12">
+                            <label for="comissao">Comissão</label>
+                            <input type="text" class="form-control reais" id="comissao" placeholder="Comissão" readonly>
+                        </div>
+                        <div class="form-group col-md-4 col-12">
+                            <label for="impostosOrc">Impostos</label>
+                            <input type="text" class="form-control reais" id="impostosOrc" placeholder="Impostos" readonly>
+                        </div>
+                        <div class="form-group col-md-6 col-12">
+                            <label for="valordosservicos">Valor dos Serviços</label>
+                            <input type="text" class="form-control reais" id="valordosservicos" placeholder="Valor dos Serviços" readonly>
+                        </div>
+                        <div class="form-group col-md-6 col-12">
+                            <label for="valortotaldoorc">Valor Total</label>
+                            <input type="text" class="form-control reais" id="valortotaldoorc" placeholder="Valor Total" readonly>
+                        </div>
+                    </div>
+                    <div class="mini-card row">
+                        <div class="form-group col-md-3 col-12">
+                            <label for="valorcobrado">Valor Cobrado</label>
+                            <input type="text" class="form-control reais" id="valorcobrado" placeholder="Valor Cobrado" required>
+                        </div>
+                        <div class="form-group col-md-3 col-12">
+                            <label for="valorporitem">Valor por Item</label>
+                            <input type="text" class="form-control reais" id="valorporitem" placeholder="Valor por Item" readonly>
+                        </div>
+                        <div class="form-group col-md-3 col-12">
+                            <label for="lucrofinal">Lucro</label>
+                            <input type="text" class="form-control reais" id="lucrofinal" placeholder="Lucro" readonly>
+                        </div>
+                        <div class="form-group col-md-3 col-12">
+                            <label for="margemdelucro">Margem de Lucro (%)</label>
+                            <input type="text" class="form-control percentual" id="margemdelucro" placeholder="Margem de Lucro" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input class="btn btn-primary btn-lg btn-block" type="submit" id="gerar" value="Gerar Proposta">
+        </form>
+        <br />
+        <div class="btn btn-success btn-lg btn-block" id="acessarproposta" hidden>Acessar Proposta
+        </div>
+    </div>
+</div>
+<div id="waitasec" class="waitasec">
+    <img style="position: absolute; left: 40%; top: 40%;" src="https://www.tekkno.com.br/loja/assets/img/carregando.jpg" alt="" width="200">
+</div>
+<style>
+    .waitasec {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(19, 40, 78, 0.9);
+        display: none;
+        cursor: wait;
+    }
+    
+    span {
+        color: red;
+    }
+    
+    .mini-card {
+        border: 1px solid rgba(0, 0, 0, .125);
+        padding: 15px;
+        margin: 10px;
+        border-radius: 15px;
+        line-height: 120% !important;
+    }
+    
+    .titulo {
+        cursor: pointer;
+    }
+</style>
+<script>
+    // Autocomplete Google Address
+    function initialize() {
+        var input = document.getElementById('enderecoGai');
+        new google.maps.places.Autocomplete(input);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    // Variáveis Globais
+    var avaliacaoValorJusto = 0
+    var avaliacaoTesteImpairment = 0
+    var avaliacaoRevisaoVidasUteis = 0
+    var valorImposto = 0
+
+    // Funções
+
+    function next1(event) {
+        event.preventDefault()
+        var a = event.target
+        $(a).parent().hide(1000)
+        $(a).parent().parent().next().children("div").show(1000)
+    }
+
+    $('.titulo').click(function(event) {
+        var a = event.target
+        $(a.nextElementSibling).toggle(1000)
+    })
+
+    $(function() {
+        $('#TouP, #complementoTC').on('keyup paste change', function() {
+            var texto = "Trata-se de serviços de consultoria de gestão do ativo imobilizado "
+            texto += $("#TouP").val()
+
+            var comp = $("#complementoTC").val()
+
+            if (comp == "") {
+                $("#infoInventario").html(texto + ".")
+            } else {
+                texto += ", " + comp + "."
+                $("#infoInventario").html(texto)
+            }
+        })
+    })
+
+    $(function() {
+        $('#diasAposPag').on('keyup paste change', function() {
+            var dias = $("#diasAposPag").val()
+            var sma = `30%, após ${dias} do início dos trabalhos de inventário.`
+            if (dias != "") {
+                $("#infoDiasAposPag").html(sma)
+            } else {
+                $("#infoDiasAposPag").html("")
+            }
+        })
+    })
+    $(function() {
+        $('#diasEntregaLaudoFinal').on('keyup paste change', function() {
+            var dias = $("#diasEntregaLaudoFinal").val()
+            var sma = `Caso o Laudo Final não possa ser entregue no prazo de <strong>${dias}</strong> dias pelo não envio, pela Empresa, da documentação solicitada ou ainda pela não aprovação da conciliação enviada, será devida a Parcela Final no 61º (sexagésimo primeiro) dia a contar da assinatura desta Proposta.`
+            if (dias != "") {
+                $("#infoDiasEntregaLaudoFinal").html(sma)
+            } else {
+                $("#infoDiasEntregaLaudoFinal").html("")
+            }
+        })
+    })
+    $(function() {
+        $('#saudacao, #nomecliente, #nomefantasia, #tipoDeServico').on('keyup paste change', function() {
+            var comp = $("#tipoDeServico").val()
+
+            if (comp != "") {
+                comp = " " + comp
+            }
+
+            var nomeemp = $("#nomefantasia").val()
+
+            var nomecli = $("#nomecliente").val()
+
+            var saudacao = $("#saudacao").val()
+
+            if (saudacao == "Sr.") {
+                saudacao = "pelo " + saudacao
+            } else {
+                saudacao = "pela " + saudacao
+            }
+
+            var texto = `Esta proposta tem por escopo o interesse inicial manifestado ${saudacao} ${nomecli} representante da empresa ${nomeemp} (“Empresa”)${comp}, compreendendo as seguintes etapas:`
+
+            $("#infoTipoDeServico").html(texto)
+
+        })
+    })
+
+    String.prototype.capitalize = function() {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    }
+
+    $(document).on('change', function() {
+        $(".checkbox-icp").each(function(x) {
+            var check = $($(".checkbox-icp")[x])
+            if (check.prop("checked")) {
+                check.val(1)
+            } else {
+                check.val(0)
+            }
+        })
+    })
+
+    $(document).on('change', '#checkValorJusto', function() {
+        if (this.checked) {
+            // checkbox is checked
+            window.avaliacaoValorJusto = 1
+        } else {
+            window.avaliacaoValorJusto = 0
+        }
+    })
+
+    $(document).on('change', '#checkTesteImpairment', function() {
+        if (this.checked) {
+            // checkbox is checked
+            window.avaliacaoTesteImpairment = 1
+        } else {
+            window.avaliacaoTesteImpairment = 0
+        }
+    })
+
+    $(document).on('change', '#checkRVU', function() {
+        if (this.checked) {
+            // checkbox is checked
+            window.avaliacaoRevisaoVidasUteis = 1
+        } else {
+            window.avaliacaoRevisaoVidasUteis = 0
+        }
+    })
+
+    $(function() {
+        $('#valorent').on("change", function() {
+            $('#valorent').val(numeral($('#valorent').val()).format('$0,0.00'))
+            let valor = numeral($('#valorass').val()).value() + numeral($('#valorent').val()).value()
+            $('#valortotal').val(numeral(valor).format('$0,0.00'))
+        })
+    })
+
+    $(function() {
+        $('#valorass').on("change", function() {
+            $('#valorass').val(numeral($('#valorass').val()).format('$0,0.00'))
+            let valor = numeral($('#valorass').val()).value() + numeral($('#valorent').val()).value()
+            $('#valortotal').val(numeral(valor).format('$0,0.00'))
+        })
+    })
+
+    $(function() {
+        $('.reais').on("change", function() {
+            $('.reais').each(function(x) {
+                if ($('.reais')[x].value != "") {
+                    $('.reais')[x].value = numeral($('.reais')[x].value).format('$0,0.00')
+                }
+            })
+        })
+    })
+
+    $(function() {
+        $('#impostos').on("change", function() {
+            let val = $('#impostos').val()
+            let imp = $('#resultadoimposto')
+            if (val == "com") {
+                window.valorImposto = 0
+                imp.html("Os honorários descritos acima são líquidos de PIS (0,65%), COFINS (3,0%) e ISS (5%). Portanto, a empresa contratante pagará à Investor o valor bruto dos serviços.")
+            } else {
+                window.valorImposto = 1
+                imp.html("Os referidos honorários abrangem todos os tributos (impostos, taxas, emolumentos, contribuições fiscais e parafiscais).")
+            }
+        })
+    })
+
+    $("#ninventariantes, #numitens, #numitensdia").on("change", function() {
+        var boo = $("#numitens").val() != "" & $("#numitensdia").val() != "" & $("#ninventariantes").val() != ""
+        var boo1 = $("#numitens").val() == 0 || $("#numitensdia").val() == 0 || $("#ninventariantes").val() == 0
+        if (boo & !boo1) {
+            $("#diasinvent").val(Math.ceil($("#numitens").val() / ($("#numitensdia").val() * $("#ninventariantes").val())))
+        } else {
+            var a = "Um dos seus itens é 0 ou menor que zero e seu resultado deu: "
+            console.error(a + Math.ceil($("#numitens").val() / ($("#numitensdia").val() * $("#ninventariantes").val())))
+        }
+    })
+    $("#valorcobrado").on("change", function() {
+        $('#valorcobrado').val(numeral($('#valorcobrado').val()).format('$0,0.00'))
+
+        var qntd = $("#numitens").val()
+
+        var valortotal = numeral($('#valorcobrado').val()).value()
+
+        var valorporitem = valortotal / qntd
+
+        $("#valorporitem").val(numeral(valorporitem).format('$0,0.00'))
+
+        var imposto = numeral($("#impostosOrc").val()).value()
+        var comissao = numeral($("#comissao").val()).value()
+        var custoback = numeral($("#backoffice").val()).value()
+        var total = numeral($("#totalcustodireto").val()).value()
+
+        var lucro = valortotal - imposto - comissao - custoback - total
+
+        var margemlucro = lucro / valortotal
+
+        $("#lucrofinal").val(numeral(lucro).format('$0,0.00'))
+
+        $("#margemdelucro").val(numeral(margemlucro).format('0.0%'))
+
+    })
+
+    $(function() {
+        setInterval(function() {
+            var margem = $("#margemdelucro")
+            var valor = numeral(margem.val()).value()
+            if (Math.round(valor * 1000) / 1000 < 0.25) {
+                $("#margemdelucro").css("background-color", "rgb(249, 103, 103)")
+                $("#margemdelucro").css("color", "rgb(255, 255, 255)")
+            } else if (Math.round(valor * 1000) / 1000 < 0.30) {
+                $("#margemdelucro").css("background-color", "rgb(249, 174, 103)")
+                $("#margemdelucro").css("color", "rgb(255, 255, 255)")
+            } else {
+                $("#margemdelucro").css("background-color", "rgb(121,180,66)")
+                $("#margemdelucro").css("color", "rgb(255, 255, 255)")
+            }
+
+        }, 500)
+    })
+
+    $(document).on("change", function() {
+        var boo = $("#diasinvent").val() != "" & $("#valordiariainvent").val() != ""
+        var boo1 = $("#valordiariainvent").val() == 0 || $("#valordiariainvent").val() == 0
+        if (boo & !boo1) {
+            var valor = $("#diasinvent").val() * numeral($("#valordiariainvent").val()).value() * $("#ninventariantes").val()
+            $("#valorinvent").val(numeral(valor).format('$0,0.00'))
+            var aavj = tdi = rvucpc27 = mdr = coorev = valor
+            aavj *= 0.6 * window.avaliacaoValorJusto
+            tdi *= 0.3 * window.avaliacaoTesteImpairment
+            rvucpc27 *= 0.4 * window.avaliacaoRevisaoVidasUteis
+            mdr *= 0.1
+            coorev *= 0.25
+
+            $("#aavj").val(numeral(aavj).format('$0,0.00'))
+            $("#tdi").val(numeral(tdi).format('$0,0.00'))
+            $("#rvucpc27").val(numeral(rvucpc27).format('$0,0.00'))
+            $("#mdr").val(numeral(mdr).format('$0,0.00'))
+            $("#coorev").val(numeral(coorev).format('$0,0.00'))
+
+            var cosn0 = $("#comousemnota").val()
+
+            var cosn = 0
+
+            switch (cosn0) {
+                case "naopossui":
+                    cosn = 0
+                    break;
+                case "comnota":
+                    cosn = 5000
+                    break;
+                case "semnota":
+                    cosn = 2500
+                    break;
+            }
+
+            var total = valor + cosn + aavj + tdi + rvucpc27 + mdr + coorev + numeral($("#layoutcarga").val()).value() + numeral($("#outroscustos").val()).value() + numeral($("#alimentacaotransporte").val()).value()
+
+            $("#totalcustodireto").val(numeral(total).format('$0,0.00'))
+
+            var customarkup = total / (numeral($("#markuppercent").val()).value() / 100)
+
+            $("#custopormarkup").val(numeral(customarkup).format('$0,0.00'))
+
+            var custoback = customarkup * 0.41
+
+            $("#backoffice").val(numeral(custoback).format('$0,0.00'))
+
+            var percom0 = $("#origemvenda").val() == null ? 0 : ($("#origemvenda").val() == "comercial1" ? 0.08 : 0.04)
+
+            var comissao = customarkup * percom0
+
+            $("#comissao").val(numeral(comissao).format('$0,0.00'))
+
+            var custservico = customarkup + custoback + comissao
+
+            $("#valordosservicos").val(numeral(custservico).format('$0,0.00'))
+
+            var tximp = 0
+
+            if (window.valorImposto == 1) {
+                tximp = 0.14
+            } else {
+                tximp = 0
+            }
+            var valortotal = custservico / (1 - tximp)
+
+            $("#valortotaldoorc").attr("anterior", $("#valortotaldoorc").val())
+
+            $("#valortotaldoorc").val(numeral(valortotal).format('$0,0.00'))
+
+            var imposto = valortotal - custservico
+
+            $("#impostosOrc").val(numeral(imposto).format('$0,0.00'))
+
+            if ($("#valortotaldoorc").val() != $("#valortotaldoorc").attr("anterior")) {
+                $("#valorcobrado").val(numeral(valortotal).format('$0,0.00'))
+
+                var valorporitem = valortotal / $("#numitens").val()
+
+                $("#valorporitem").val(numeral(valorporitem).format('$0,0.00'))
+
+                var lucro = valortotal - imposto - comissao - custoback - total
+
+                var margemlucro = lucro / valortotal
+
+
+
+                $("#lucrofinal").val(numeral(lucro).format('$0,0.00'))
+
+                $("#margemdelucro").val(numeral(margemlucro).format('0.0%'))
+            }
+
+        } else {
+            var a = "Um dos seus itens é 0 ou menor que zero e seu resultado deu: "
+            console.error(a + Math.ceil($("#diasinvent").val() * numeral($("#valordiariainvent").val()).value()))
+        }
+    })
+
+    $(function() {
+        $('.input-data').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+    });
+
+    $(function() {
+        var data = new Date()
+        var dia = data.getDate()
+        var mes = data.getMonth() + 1
+        var ano = data.getFullYear()
+        if (dia.toString().length != 2) {
+            dia = "0" + dia.toString()
+        }
+        if (mes.toString().length != 2) {
+            mes = "0" + mes.toString()
+        }
+        $('.hoje').val(dia + "/" + mes + "/" + ano)
+
+        function codSeq(a) {
+            var cid = a[0][0].toString()
+            var seq = a[0][1].toString()
+            var ano = a[0][2].toString()
+            if (cid.length != 2) {
+                cid = "0" + cid
+            }
+            while (seq.length != 4) {
+                seq = "0" + seq
+            }
+            var data = cid + seq + ano
+            $('#codigoproposta').val(data)
+        }
+
+        function failure() {
+            alert("Não foi possível recuperar o código da proposta.")
+        }
+        google.script.run.withSuccessHandler(codSeq).withFailureHandler().getProp()
+    })
+
+    function whichMon(a) {
+        var m = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
+        var r = m[(a - 1)]
+        return r
+    }
+
+    function novaProposta(e) {
+
+        e.preventDefault()
+        $("#gerar").attr("disabled", true)
+        $("#waitasec").show()
+
+        var array1 = getDataForm()
+
+        function success(url) {
+            $("#waitasec").hide()
+            $("#acessarproposta").attr("hidden", false)
+            $("#acessarproposta").attr("link", url)
+            alert("Proposta Gerada")
+        }
+
+        function failure(e) {
+            $("#waitasec").hide()
+            $("#gerar").attr("disabled", false)
+            alert("Erro em gerar proposta.")
+            console.error(e)
+        }
+
+        google.script.run.withSuccessHandler(success).withFailureHandler(failure).propostaGAI(array1)
+
+        return false
+    }
+
+    function getDataForm() {
+        var form = $("#gaiform")[0]
+        var n = form.length
+        var array1 = [
+            [],
+            []
+        ]
+        var obj1 = {}
+
+        for (i = 0; i < n; i++) {
+            obj1[$(form[i]).attr("id")] = $(form[i]).val()
+        }
+        var obj2 = JSON.stringify(obj1)
+
+        return obj2
+    }
+
+    $("#acessarproposta").on("click", function() {
+        window.open($("#acessarproposta").attr("link"))
+    })
+    $(function() {
+        $("#gaiform").validator()
+    })
+    $(function() {
+        let data = new Date()
+        let ano = data.getFullYear() - 1
+        let lAno = ano - 2
+        let frase = lAno + " à " + ano
+        $('.ultimos3anos').val(frase)
+    })
+</script>

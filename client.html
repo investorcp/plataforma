@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!-- Desenvolvido por Paulo Moisés. Em dúvidas sobre a edição, entre em contato pelo site: www.paulomoises.com ou pelo email: paulomoises_silva@hotmail.com -->
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/locales/pt-br.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArffpRRcX7uR27n-g_CrYsQk_ZlFT9_iw&libraries=places"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/bdaea6cd67.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cliente</title>
+</head>
+
+<body>
+    <div class="bg-roxo shadow d-flex flex-row justify-content-end align-self-center">
+        <a class="nav-link ft-cinza my-2" href="#" id="inicio" icp-link="inicio">
+            <i class="fas fa-home"></i> Início</a>
+        <a class="nav-link ft-cinza my-2" href="#" id="cliente" icp-link="cliente"> <i class="fas fa-user"></i> Clientes
+        </a>
+        <a class="nav-link ft-cinza my-2" href="#" id="proposta" icp-link="proposta"><i class="fas fa-file"></i>
+            Propostas</a>
+    </div>
+    <div>
+        <div class="container-fluid mt-4">
+            <div class="row">
+                <div class="col-12">
+                    <p id="indice">Comercial > Cliente > </p>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 id="nomeT"></h4>
+                        <small class="text-info"></small>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="razaosocial">Razão Social</label>
+                                <input type="text" class="form-control" id="razaosocial" placeholder="Insira o Razão Social">
+                            </div>
+                            <div class="form-group">
+                                <label for="nomefantasia">Nome Fantasia</label>
+                                <input type="text" class="form-control" id="nomefantasia" placeholder="Insira o Nome Fantasia" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cnpj">
+                                    CNPJ
+                                </label>
+                                <input type="text" class="form-control cnpj" id="cnpj" placeholder="Infome seu CNPJ">
+                            </div>
+                            <div class="form-group">
+                                <label for="nomeresponsavel">Responsável</label>
+                                <input type="text" class="form-control" id="nomeresponsavel" placeholder="Insira o Responsável" required>
+                            </div>
+                            <div class="row d-flex align-self-center">
+                                <div class="col-10 form-group" style="margin: 0;">
+                                    <label for="nomeavaliada">Nome da empresa avaliada</label><br />
+                                    <input type="text" class="form-control" id="nomeavaliada" placeholder="Insira o nome da empresa avaliada">
+                                </div>
+                                <div class="col-1">
+                                    <p class="text-center" style="line-height: 125%; font-size: 75%">Mesma empresa contratada?
+                                    </p>
+                                </div>
+                                <div class="col-1 form-check form-group">
+                                    <input class="form-check-input form-control" type="checkbox" value="" id="mesmonome" alt="Mesma empresa contratante" checked=true>
+                                </div>
+                            </div>
+                            <div class="form-group" style="line-height:100%">
+                                <small>Para inserir mais de uma empresa a ser avaliada, separe os nomes por
+                                    vírgulas.</small><br />
+                                <small>Ex: Empresa 1, Empresa 2, Empresa 3</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone">Telefone</label>
+                                <input type="text" class="form-control telefone" id="telefone" placeholder="Insira o Telefone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Insira o email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="site">Site</label>
+                                <input type="text" class="form-control Site" id="site" placeholder="Insira o Site">
+                            </div>
+                            <div class="form-group">
+                                <label>Status do Prospect</label><br>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitches">
+                                    <label class="custom-control-label" for="customSwitches" id="customSwitches1">Cliente Inativo</label>
+                                </div>
+                            </div>
+                        </form>
+                        <button class="btn btn-primary btn-lg btn-block" onclick="alterarcliente()" id="alterar">Alterar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="waitasec" class="waitasec">
+        <img style="position: absolute; left: 40%; top: 40%;" src="https://www.tekkno.com.br/loja/assets/img/carregando.jpg" alt="" width="200">
+    </div>
+    <style>
+        .waitasec {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(19, 40, 78, 0.9);
+            cursor: wait;
+        }
+        
+        .bg-roxo {
+            background-color: rgb(19, 40, 78);
+        }
+        
+        .ft-cinza {
+            color: rgb(217, 217, 217);
+        }
+        
+        .ft-cinza:hover {
+            color: #fff;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+    </style>
+    <script>
+        var idCliente = ""
+
+        $(document).ready(function() {
+            var aa = $("#customSwitches").prop("checked")
+            if (aa) {
+                $("#customSwitches1").html("Cliente Ativo")
+            } else {
+                $("#customSwitches1").html("Cliente Inativo")
+            }
+        })
+        $("#customSwitches").on("change", function() {
+            var aa = $("#customSwitches").prop("checked")
+            if (aa) {
+                $("#customSwitches1").html("Cliente Ativo")
+            } else {
+                $("#customSwitches1").html("Cliente Inativo")
+            }
+        })
+
+        $(function() {
+            var id = $.cookie('clientID')
+            window.idCliente = id
+            if (id) {} else {
+                $("#alterar").attr("disabled", true)
+            }
+
+            var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getClientById&id=" + id
+
+            $.getJSON(url, function(data) {
+                var dados = data.cliente
+                showClient(dados)
+            }).done(function() {
+                $("#waitasec").hide()
+            }).fail(function() {
+                $("#waitasec").hide(400)
+            })
+
+            $.removeCookie('clientID')
+        })
+
+        function close_window() {
+            alert("Cliente Salvo.")
+            close()
+        }
+
+        function alterarClienteServer(array1) {
+            var aa = JSON.stringify({
+                a: array1
+            })
+
+            var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=changeClient&array1=" + aa
+
+            function success() {
+                $("#alterar").attr("disabled", false)
+
+                close_window()
+            }
+
+            function failure(e) {
+                console.error(e)
+                $("#alterar").attr("disabled", false)
+                alert("Erro em salvar cliente")
+            }
+
+            $.getJSON(url, function(d) {
+                success()
+                showClient(d)
+            }).fail(function(e) {
+                failure(e)
+            })
+        }
+
+        function showClient(dados) {
+            $("#razaosocial").val(dados[1])
+            $("#nomefantasia").val(dados[2])
+            $("#nomeT").html(dados[2])
+            $("#indice").append(dados[2])
+            $("#cnpj").val(dados[3])
+            $("#nomeresponsavel").val(dados[4])
+            $("#nomeavaliada").val(dados[5])
+            $("#telefone").val(dados[6])
+            $("#email").val(dados[7])
+            $("#site").val(dados[8])
+            var aa = dados[9]
+            if (aa == 1) {
+                $("#customSwitches").prop("checked", true)
+                $("#customSwitches1").html("Cliente Ativo")
+            } else {
+                $("#customSwitches").prop("checked", false)
+                $("#customSwitches1").html("Cliente Inativo")
+            }
+        }
+        $(function() {
+            $("#nomefantasia, #mesmonome").on("change", function() {
+                var mesmo = document.getElementById("mesmonome").checked
+                if (mesmo) {
+                    $("#nomeavaliada").val($("#nomefantasia").val())
+                }
+            })
+        })
+
+        function alterarcliente() {
+
+            $("#alterar").attr("disabled", true)
+
+            // Para pegar todos os dados preenchidos
+            var razaosocial = $("#razaosocial").val()
+            var nomefantasia = $("#nomefantasia").val()
+            var cnpj = $("#cnpj").val()
+            var nomeresponsavel = $("#nomeresponsavel").val()
+            var nomeavaliada = $("#nomeavaliada").val()
+            var telefone = $("#telefone").val()
+            var email = $("#email").val()
+            var site = $("#site").val()
+            var status = $("#customSwitches").prop("checked") ? 1 : 0
+
+
+            var array1 = [window.idCliente, razaosocial, nomefantasia, cnpj, nomeresponsavel, nomeavaliada, telefone, email, site, status]
+
+            alterarClienteServer(array1)
+
+            return false
+        }
+
+        $(function() {
+            var CNPJmask = [{
+                "mask": "###.###.###/####-##"
+            }];
+            $('.cnpj').inputmask({
+                mask: CNPJmask,
+                greedy: false,
+                definitions: {
+                    '#': {
+                        validator: "[0-9]",
+                        cardinality: 1
+                    }
+                }
+            });
+        });
+
+        // Corrigir para aceitar varios tipos de telefone
+        // $(function () {
+        //     $('.telefone').inputmask({
+        //         mask: ["(###) #####-####","(##) #####-####","(###) ####-####","(##) ####-####","## (##) ####-####","## (##) #####-####"],
+        //         greedy: true,
+        //         keepStatic: true,
+        //         definitions: { '#': { validator: "[0-9]", cardinality: 1 } }
+        //     });
+        // });
+    </script>
+
+</body>
+
+</html>

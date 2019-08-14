@@ -1,0 +1,214 @@
+<!-- Desenvolvido por Paulo Moisés. Em dúvidas sobre a edição, entre em contato pelo site: www.paulomoises.com ou pelo email: paulomoises_silva@hotmail.com -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/locales/pt-br.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArffpRRcX7uR27n-g_CrYsQk_ZlFT9_iw&libraries=places"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<div class="card">
+    <div class="card-header">
+        <h4>Prospects Salvos</h4>
+    </div>
+    <div class="card-body" id="principal">
+        <div class="row">
+            <div class="form-group col-md-6 col-12">
+                <label for="pesquisa">Nome da empresa</label>
+                <input id="pesquisa" type="text" class="form-control" placeholder="Procure pelo nome da empresa">
+            </div>
+            <div class="form-group col-md-6 col-12">
+                <label for="statuscliente">Status</label>
+                <select class="form-control" id="statuscliente">
+                    <option value="cliente" selected>Todos</option>
+                    <option value="clienteativo">Ativos</option>
+                    <option value="clienteinativo">Inativos</option>
+                </select>
+            </div>
+        </div>
+        <div class="row clienteT" clienteID="">
+            <div class="col-md-1 col-1  dado"> Código</div>
+            <div class="col-md-3 col-12 dado">Nome da Empresa</div>
+            <div class="col-md-3 col-12 dado">Nome do Responsável</div>
+            <div class="col-md-2 col-12 dado">Telefone</div>
+            <div class="col-md-3 col-12 dado">Email</div>
+        </div>
+    </div>
+    <div id="teste"></div>
+</div>
+<div id="waitasec" class="waitasec">
+    <img style="position: absolute; left: 40%; top: 40%;" src="https://www.tekkno.com.br/loja/assets/img/carregando.jpg" alt="" width="200">
+</div>
+<style>
+    .waitasec {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(19, 40, 78, 0.9);
+        cursor: wait;
+    }
+    
+    .cliente:hover {
+        background-color: rgba(19, 40, 78, .255)
+    }
+    
+    .more-details {
+        display: none;
+    }
+    
+    .cliente {
+        border: 1px solid rgba(0, 0, 0, .125);
+        padding: 15px;
+        margin: 10px;
+        border-radius: 15px;
+        line-height: 120%;
+    }
+    
+    .clienteT {
+        border: 1px solid rgba(0, 0, 0, .125);
+        background-color: rgba(19, 40, 78, .255);
+        padding: 15px;
+        margin: 10px;
+        border-radius: 15px;
+        line-height: 120%;
+    }
+    
+    .dado {
+        line-height: 250% !important;
+    }
+    
+    .clienteativo {
+        background-color: rgba(121, 180, 66, .255)
+    }
+    
+    .clienteinativo {
+        background-color: rgba(197, 27, 27, 0.255)
+    }
+</style>
+<script>
+    $("#pesquisa, #statuscliente").on("edit paste change keyup", function() {
+        pesquisar()
+    })
+    var idCliente = ""
+        // Utilizar link parecido com API para acessar as coisas....
+    $(document).ready(function() {
+        var url = window.location.href
+        var cods = url.split('?')
+        var tip = cods[1].split('&')
+        var m = []
+        tip.forEach(function(x) {
+            if (x.match("id")) {
+                m.push(x)
+            }
+            var k = m[0].split("=") == "id" ? m[0].split("=") : ""
+            window.idCliente = k
+        })
+    })
+
+    function pesquisar() {
+        var nome = $("#pesquisa").val()
+        nome = nome.toLocaleLowerCase()
+        var status = $("#statuscliente").val()
+        $.cookie('statusPesquisa', status)
+        $(".cliente").each(function(x) {
+            var nome1 = $($(".cliente")[x]).attr("clientName")
+            nome1 = nome1.toLocaleLowerCase()
+
+            var st = $($(".cliente")[x]).hasClass(status)
+
+            var n = nome1.match(nome) ? true : false
+
+            var bool1 = n && st
+            console.log(bool1)
+            if (bool1) {
+                $($(".cliente")[x]).show()
+            } else {
+                $($(".cliente")[x]).hide()
+            }
+        })
+    }
+
+    function expandDados(event) {
+        var div = $(event.target)
+        var parent = $(div).parents(".cliente")
+        var divH = $(parent).children(".more-details")
+        var tipo = $(div).prop("tagName")
+        if (tipo != "BUTTON") {
+            $(divH).toggle(100)
+        }
+    }
+
+    function acessarPropostas(event) {
+        var div = $(event.target)
+        var parent = $(div).parents(".cliente")
+        var id = $(parent).attr("clienteID")
+        $.cookie('clientID', id, {
+            expires: 7,
+            path: '/'
+        });
+        window.open("/propostas")
+    }
+
+    function acessarCliente(event) {
+        var div = $(event.target)
+        var parent = $(div).parents(".cliente")
+        var id = $(parent).attr("clienteID")
+        $.cookie('clientID', id, {
+            expires: 7,
+            path: '/'
+        });
+        var win = window.open("/client")
+        var timer = setInterval(function() {
+            if (win.closed) {
+                clearInterval(timer)
+                console.log("1")
+                window.location.reload(true)
+            }
+        }, 100)
+    }
+
+    function openPasta(event) {
+        var url = $(event.target).attr('url')
+        window.open(url)
+    }
+
+    function atualizarCookies() {
+        var status = $.cookie('statusPesquisa')
+        if (status) {
+            $("#statuscliente").val(status)
+            pesquisar()
+        }
+    }
+
+    $.getJSON("https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getAllClientsData",
+        function(dados) {
+            $("#waitasec").hide()
+            var cli = dados.clientes
+            var cab = cli.shift()
+            cli.forEach(e => {
+                var class1 = e[9] == 1 ? "clienteativo" : "clienteinativo"
+                var site = (e[8]).split(":")
+                var site = e[8] == "" ? "" : (site[0] == "http" ? e[8] : "http://" + e[8])
+                var dado = `<div class="row cliente ${class1}" onclick="expandDados(event)" clienteID="${e[0]}" clientName="${e[2]}">
+                        <div class="col-md-1 col-1 dado">${e[0]}</div>
+            <div class="col-md-3 col-12 dado">${e[2]}</div>
+            <div class="col-md-3 col-12 dado">${e[4]}</div>
+            <div class="col-md-2 col-12 dado">${e[6]}</div>
+            <div class="col-md-3 col-12 dado"><a href="mailto:${e[7]}">${e[7]}</a></div>
+            <div class="more-details row col-md-12 col-12">
+                <div class="col-12 dado"><strong>Razão Social:</strong> ${e[1]}</div>
+                <div class="col-12 dado"><strong>CNPJ:</strong> ${e[3]}</div>
+                <div class="col-12 dado"><strong>Nome da Avaliada:</strong> ${e[5]}</div>
+                <div class="col-12 dado"><strong>Site:</strong> <a href="${site}" target="_blank">${site}</a></div>
+                <button class="btn btn-success" onclick="acessarPropostas(event)">Acessar Propostas</button>
+                <button class="btn btn-primary" onclick="acessarCliente(event)">Acessar Cliente</button>
+                <button class="btn btn-warning" url="${e[11]}" onclick="openPasta(event)">Acessar Pasta</button>
+            </div>
+            </div>`
+                $("#principal").append(dado)
+            });
+            atualizarCookies()
+        })
+</script>
