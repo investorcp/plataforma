@@ -1,12 +1,26 @@
+<!DOCTYPE html>
 <!-- Desenvolvido por Paulo Moisés. Em dúvidas sobre a edição, entre em contato pelo site: www.paulomoises.com ou pelo email: paulomoises_silva@hotmail.com -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/locales/pt-br.min.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArffpRRcX7uR27n-g_CrYsQk_ZlFT9_iw&libraries=places"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/png" href="https://investorcp.com/wp-content/uploads/2019/05/investorcp.com-favicon.png" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/bdaea6cd67.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.8/inputmask/bindings/inputmask.binding.min.js"></script>
+    <title>Todos Prospects</title>
+</head>
+<body>
+    <div id="nav"></div>
 <div class="card">
     <div class="card-header">
         <h4>Prospects Salvos</h4>
@@ -39,54 +53,6 @@
 <div id="waitasec" class="waitasec">
     <img style="position: absolute; left: 40%; top: 40%;" src="https://www.tekkno.com.br/loja/assets/img/carregando.jpg" alt="" width="200">
 </div>
-<style>
-    .waitasec {
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(19, 40, 78, 0.9);
-        cursor: wait;
-    }
-    
-    .cliente:hover {
-        background-color: rgba(19, 40, 78, .255)
-    }
-    
-    .more-details {
-        display: none;
-    }
-    
-    .cliente {
-        border: 1px solid rgba(0, 0, 0, .125);
-        padding: 15px;
-        margin: 10px;
-        border-radius: 15px;
-        line-height: 120%;
-    }
-    
-    .clienteT {
-        border: 1px solid rgba(0, 0, 0, .125);
-        background-color: rgba(19, 40, 78, .255);
-        padding: 15px;
-        margin: 10px;
-        border-radius: 15px;
-        line-height: 120%;
-    }
-    
-    .dado {
-        line-height: 250% !important;
-    }
-    
-    .clienteativo {
-        background-color: rgba(121, 180, 66, .255)
-    }
-    
-    .clienteinativo {
-        background-color: rgba(197, 27, 27, 0.255)
-    }
-</style>
 <script>
     $("#pesquisa, #statuscliente").on("edit paste change keyup", function() {
         pesquisar()
@@ -212,3 +178,5 @@
             atualizarCookies()
         })
 </script>
+</body>
+</html>

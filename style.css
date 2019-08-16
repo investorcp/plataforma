@@ -64,3 +64,50 @@ body {
 .card-header-icp {
     line-height: 130% !important;
 }
+
+.waitasec {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(19, 40, 78, 0.9);
+    cursor: wait;
+}
+
+.cliente:hover {
+    background-color: rgba(19, 40, 78, .255)
+}
+
+.more-details {
+    display: none;
+}
+
+.cliente {
+    border: 1px solid rgba(0, 0, 0, .125);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 15px;
+    line-height: 120%;
+}
+
+.clienteT {
+    border: 1px solid rgba(0, 0, 0, .125);
+    background-color: rgba(19, 40, 78, .255);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 15px;
+    line-height: 120%;
+}
+
+.dado {
+    line-height: 250% !important;
+}
+
+.clienteativo {
+    background-color: rgba(121, 180, 66, .255)
+}
+
+.clienteinativo {
+    background-color: rgba(197, 27, 27, 0.255)
+}
