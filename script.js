@@ -2,21 +2,23 @@ $("body").delegate("#newPropose", "click", function() {
     navegar("novaProposta")
 })
 
-$("body").delegate("#newClient", "click", function() {
-    $.get("src/components/clientes/novo-clientes.html", function(data) {
-        $("#body").html(data)
-    })
+function addFun(){
+$("body").delegate(".nav-link, .acc-link", "click", function(event) {
+   var btn = $(event.target).attr("icp-link")
+   window.open(btn,"_self")
 })
-
-$("#cliente").on("click", function() {
-    $.get("src/components/clientes/clientes.html", function(data) {
-        $("#body").html(data)
-    })
-})
+}
 
 $("#proposta").on("click", function() {
     $.get("src/components/proposta/proposta.html", function(data) {
         $("#body").html(data)
+    })
+})
+
+$(function(){
+    $.get("navbar.html", function(data){
+        $("#nav").html(data)
+        addFun()
     })
 })
 
