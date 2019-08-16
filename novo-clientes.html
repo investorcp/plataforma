@@ -1,196 +1,223 @@
-<div class="container-fluid mt-4">
-    <div class="row">
-        <div class="col-12">
-            <p>Comercial > Cliente > Novo Cliente</p>
+<!DOCTYPE html>
+<!-- Desenvolvido por Paulo Moisés. Em dúvidas sobre a edição, entre em contato pelo site: www.paulomoises.com ou pelo email: paulomoises_silva@hotmail.com -->
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png"
+        href="https://investorcp.com/wp-content/uploads/2019/05/investorcp.com-favicon.png" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/locales/pt-br.min.js"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArffpRRcX7uR27n-g_CrYsQk_ZlFT9_iw&libraries=places"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/bdaea6cd67.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cliente</title>
+</head>
+
+<body>
+    <div id="nav">
+    </div>
+    <div>
+        <div class="container-fluid mt-4">
+            <div class="row">
+                <div class="col-12">
+                    <p>Comercial > Cliente > Novo Cliente</p>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Novo Cliente</h4>
+                        <small class="text-info">Preencha os campos abaixo para cadastrar um novo cliente.</small>
+                    </div>
+                    <div class="card-body">
+                        <form onsubmit="return salvarcliente(event)">
+                            <div class="form-group">
+                                <label for="razaosocial">Razão Social</label>
+                                <input type="text" class="form-control" id="razaosocial"
+                                    placeholder="Insira o Razão Social">
+                            </div>
+                            <div class="form-group">
+                                <label for="nomefantasia">Nome Fantasia</label>
+                                <input type="text" class="form-control" id="nomefantasia"
+                                    placeholder="Insira o Nome Fantasia" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cnpj">
+                                    CNPJ
+                                </label>
+                                <input type="text" class="form-control cnpj" id="cnpj" placeholder="Infome seu CNPJ">
+                            </div>
+                            <div class="form-group">
+                                <label for="nomeresponsavel">Responsável</label>
+                                <input type="text" class="form-control" id="nomeresponsavel"
+                                    placeholder="Insira o Responsável" required>
+                            </div>
+                            <div class="row d-flex align-self-center">
+                                <div class="col-10 form-group" style="margin: 0;">
+                                    <label for="nomeavaliada">Nome da empresa avaliada</label><br />
+                                    <input type="text" class="form-control" id="nomeavaliada"
+                                        placeholder="Insira o nome da empresa avaliada">
+                                </div>
+                                <div class="col-1">
+                                    <p class="text-center" style="line-height: 125%; font-size: 75%">Mesma empresa
+                                        contratada?</p>
+                                </div>
+                                <div class="col-1 form-check form-group">
+                                    <input class="form-check-input form-control" type="checkbox" value="" id="mesmonome"
+                                        alt="Mesma empresa contratante" checked=true>
+                                </div>
+                            </div>
+                            <div class="form-group" style="line-height:100%">
+                                <small>Para inserir mais de uma empresa a ser avaliada, separe os nomes por
+                                    vírgulas.</small><br />
+                                <small>Ex: Empresa 1, Empresa 2, Empresa 3</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone">Telefone</label>
+                                <input type="text" class="form-control telefone" id="telefone"
+                                    placeholder="Insira o Telefone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Insira o email"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="site">Site</label>
+                                <input type="text" class="form-control Site" id="site" placeholder="Insira o Site">
+                            </div>
+                            <div class="form-group">
+                                <label>Status do Prospect</label><br>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitches">
+                                    <br><label class="custom-control-label" for="customSwitches" id="textoCuston">Cliente Inativo</label>
+                                </div>
+                            </div>
+                            <input class="btn btn-primary btn-lg btn-block" type="submit" id="salvar" value="Salvar">
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4>Novo Cliente</h4>
-                <small class="text-info">Preencha os campos abaixo para cadastrar um novo cliente.</small>
-            </div>
-            <div class="card-body">
-                <form onsubmit="return salvarcliente(event)">
-                    <div class="form-group">
-                        <label for="razaosocial">Razão Social</label>
-                        <input type="text" class="form-control" id="razaosocial" placeholder="Insira o Razão Social">
-                    </div>
-                    <div class="form-group">
-                        <label for="nomefantasia">Nome Fantasia</label>
-                        <input type="text" class="form-control" id="nomefantasia" placeholder="Insira o Nome Fantasia" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cnpj">
-                                CNPJ
-                            </label>
-                        <input type="text" class="form-control cnpj" id="cnpj" placeholder="Infome seu CNPJ">
-                    </div>
-                    <div class="form-group">
-                        <label for="nomeresponsavel">Responsável</label>
-                        <input type="text" class="form-control" id="nomeresponsavel" placeholder="Insira o Responsável" required>
-                    </div>
-                    <div class="row d-flex align-self-center">
-                        <div class="col-10 form-group" style="margin: 0;">
-                            <label for="nomeavaliada">Nome da empresa avaliada</label><br />
-                            <input type="text" class="form-control" id="nomeavaliada" placeholder="Insira o nome da empresa avaliada">
-                        </div>
-                        <div class="col-1">
-                            <p class="text-center" style="line-height: 125%; font-size: 75%">Mesma empresa contratada?
-                            </p>
-                        </div>
-                        <div class="col-1 form-check form-group">
-                            <input class="form-check-input form-control" type="checkbox" value="" id="mesmonome" alt="Mesma empresa contratante" checked=true>
-                        </div>
-                    </div>
-                    <div class="form-group" style="line-height:100%">
-                        <small>Para inserir mais de uma empresa a ser avaliada, separe os nomes por vírgulas.</small><br />
-                        <small>Ex: Empresa 1, Empresa 2, Empresa 3</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone">Telefone</label>
-                        <input type="text" class="form-control telefone" id="telefone" placeholder="Insira o Telefone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Insira o email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="site">Site</label>
-                        <input type="text" class="form-control Site" id="site" placeholder="Insira o Site">
-                    </div>
-                    <input class="btn btn-primary btn-lg btn-block" type="submit" id="salvar" value="Salvar">
-                </form>
-            </div>
+    <div id="waitasec" style="display: none" class="waitasec">
+            <img style="position: absolute; left: 40%; top: 40%;" src="https://www.tekkno.com.br/loja/assets/img/carregando.jpg" alt="" width="200">
         </div>
-    </div>
-</div>
-
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/bdaea6cd67.js"></script>
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
-
-<script>
-    $(function() {
-        $("#nomefantasia, #mesmonome").on("change", function() {
-            var mesmo = document.getElementById("mesmonome").checked
-            if (mesmo) {
-                $("#nomeavaliada").val($("#nomefantasia").val())
-            }
-        })
-    })
-
-    function salvarcliente(e) {
-
-        e.preventDefault()
-
-        $("#salvar").attr("disabled", true)
-
-        // Para pegar todos os dados preenchidos
-        var razaosocial = $("#razaosocial").val()
-        var nomefantasia = $("#nomefantasia").val()
-        var cnpj = $("#cnpj").val()
-        var nomeresponsavel = $("#nomeresponsavel").val()
-        var nomeavaliada = $("#nomeavaliada").val()
-        var telefone = $("#telefone").val()
-        var email = $("#email").val()
-        var site = $("#site").val()
-
-
-
-        var array1 = [razaosocial, nomefantasia, cnpj, nomeresponsavel, nomeavaliada, telefone, email, site]
-
-        function success() {
-            $("#salvar").attr("disabled", false)
-            alert("Cliente Salvo")
-
-            // Para limpar o form
-            $("#razaosocial").val("")
-            $("#nomefantasia").val("")
-            $("#cnpj").val("")
-            $("#nomeresponsavel").val("")
-            $("#nomeavaliada").val("")
-            $("#telefone").val("")
-            $("#email").val("")
-            $("#site").val("")
-        }
-
-        function failure() {
-            $("#salvar").attr("disabled", false)
-            alert("Erro em salvar cliente")
-        }
-
-        google.script.run.withSuccessHandler(success).withFailureHandler(failure).addCliente(array1)
-
-        return false
-    }
-
-    $(function() {
-        var CNPJmask = [{
-            "mask": "###.###.###/####-##"
-        }];
-        $('.cnpj').inputmask({
-            mask: CNPJmask,
-            greedy: false,
-            definitions: {
-                '#': {
-                    validator: "[0-9]",
-                    cardinality: 1
-                }
-            }
-        });
-    });
-
-    // Corrigir para aceitar varios tipos de telefone
-    // $(function () {
-    //     $('.telefone').inputmask({
-    //         mask: ["(###) #####-####","(##) #####-####","(###) ####-####","(##) ####-####","## (##) ####-####","## (##) #####-####"],
-    //         greedy: true,
-    //         keepStatic: true,
-    //         definitions: { '#': { validator: "[0-9]", cardinality: 1 } }
-    //     });
-    // });
-
-    function navegar(pagina) {
-        google.script.run.withSuccessHandler(changePage).newPage(pagina)
-    }
-
-    function changePage(page) {
-        document.open(); //should work fine without this
-        document.write(page);
-        document.close(); //should work fine without this
-    }
-
-    document.querySelectorAll('[icp-link]').forEach(link => {
-        const url = link.attributes['icp-link'].value
-        link.onclick = e => {
-            e.preventDefault()
-            navegar(url)
-        }
-    })
-
-    $(function() {
-        $('#valorass,#valorent').on("change", function() {
-            let valor = numeral($('#valorass').val()).value() + numeral($('#valorent').val()).value()
-            $('#valortotal').val(numeral(valor).format('$0,0.00'))
-        })
-    })
-
-    $(function() {
-        $('#impostos').on("change", function() {
-            let val = $('#impostos').val()
-            let imp = $('#resultadoimposto')
-            if (val == "com") {
-                imp.html("Os honorários descritos acima são líquidos de PIS (0,65%), COFINS (3,0%) e ISS (5%). Portanto, a empresa contratante pagará à Investor o valor bruto dos serviços.")
+    <script>
+        $(document).ready(function () {
+            $("#customSwitches").prop("checked", true)
+            var aa = $("#customSwitches").prop("checked")
+            if (aa) {
+                $("#textoCuston").html("Cliente Ativo")
             } else {
-                imp.html("Os referidos honorários abrangem todos os tributos (impostos, taxas, emolumentos, contribuições fiscais e parafiscais).")
+                $("#textoCuston").html("Cliente Inativo")
             }
         })
-    })
-</script>
+        $("#customSwitches").on("change", function () {
+            var aa = $("#customSwitches").prop("checked")
+            if (aa) {
+                $("#textoCuston").html("Cliente Ativo")
+            } else {
+                $("#textoCuston").html("Cliente Inativo")
+            }
+        })
+        $(function () {
+            $("#nomefantasia, #mesmonome").on("change", function () {
+                var mesmo = document.getElementById("mesmonome").checked
+                if (mesmo) {
+                    $("#nomeavaliada").val($("#nomefantasia").val())
+                }
+            })
+        })
+
+        function salvarClienteServer(array1) {
+            var aa = JSON.stringify({
+                a: array1
+            })
+            var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=addCliente&array1=" + aa
+
+            function success(id) {
+                $.removeCookie('clientID')
+                $.cookie('clientID', id, {
+                    expires: 7,
+                    path: '/'
+                });
+                var win = window.open("client","_self")
+            }
+
+            function failure(e) {
+                console.error(e)
+                $("#waitasec").hide()
+                $("#salvar").attr("disabled", false)
+                alert("Erro em salvar cliente")
+            }
+
+            $.getJSON(url, function (d) {
+                success(a)
+                showClient(d)
+            }).fail(function (e) {
+                failure(e)
+            })
+        }
+
+        function salvarcliente(e) {
+
+            e.preventDefault()
+
+            $("#salvar").attr("disabled", true)
+            $("#waitasec").show()
+
+            // Para pegar todos os dados preenchidos
+            var razaosocial = $("#razaosocial").val()
+            var nomefantasia = $("#nomefantasia").val()
+            var cnpj = $("#cnpj").val()
+            var nomeresponsavel = $("#nomeresponsavel").val()
+            var nomeavaliada = $("#nomeavaliada").val()
+            var telefone = $("#telefone").val()
+            var email = $("#email").val()
+            var site = $("#site").val()
+            var status = $("#customSwitches").prop("checked") ? 1 : 0
+
+
+            var array1 = [razaosocial, nomefantasia, cnpj, nomeresponsavel, nomeavaliada, telefone, email, site, status]
+
+            salvarClienteServer(array1)
+
+            return false
+        }
+
+        $(function () {
+            var CNPJmask = [{ "mask": "###.###.###/####-##" }];
+            $('.cnpj').inputmask({
+                mask: CNPJmask,
+                greedy: false,
+                definitions: { '#': { validator: "[0-9]", cardinality: 1 } }
+            })
+        })
+    </script>
+</body>
+
+</html>

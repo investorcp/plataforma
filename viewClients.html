@@ -17,6 +17,7 @@
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.8/inputmask/bindings/inputmask.binding.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <title>Todos Prospects</title>
 </head>
 <body>
@@ -41,7 +42,7 @@
             </div>
         </div>
         <div class="row clienteT" clienteID="">
-            <div class="col-md-1 col-1  dado"> Código</div>
+            <div class="col-md-1 col-1  dado">Código</div>
             <div class="col-md-3 col-12 dado">Nome da Empresa</div>
             <div class="col-md-3 col-12 dado">Nome do Responsável</div>
             <div class="col-md-2 col-12 dado">Telefone</div>
@@ -110,6 +111,7 @@
         var div = $(event.target)
         var parent = $(div).parents(".cliente")
         var id = $(parent).attr("clienteID")
+        $.removeCookie('clientID')
         $.cookie('clientID', id, {
             expires: 7,
             path: '/'
@@ -121,11 +123,12 @@
         var div = $(event.target)
         var parent = $(div).parents(".cliente")
         var id = $(parent).attr("clienteID")
+        $.removeCookie('clientID')
         $.cookie('clientID', id, {
             expires: 7,
             path: '/'
         });
-        var win = window.open("/client")
+        var win = window.open("client")
         var timer = setInterval(function() {
             if (win.closed) {
                 clearInterval(timer)
