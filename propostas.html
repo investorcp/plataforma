@@ -1,12 +1,19 @@
 <!-- Desenvolvido por Paulo Moisés. Em dúvidas sobre a edição, entre em contato pelo site: www.paulomoises.com ou pelo email: paulomoises_silva@hotmail.com -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/locales/pt-br.min.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArffpRRcX7uR27n-g_CrYsQk_ZlFT9_iw&libraries=places"></script>
+<script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArffpRRcX7uR27n-g_CrYsQk_ZlFT9_iw&libraries=places"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<link rel="shortcut icon" type="image/png"
+href="https://investorcp.com/wp-content/uploads/2019/05/investorcp.com-favicon.png" />
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+<title>Proposta</title>
 <div class="card">
     <div class="card-header">
         <h4 id="prospectNome">Propostas do Prospect </h4>
@@ -14,7 +21,8 @@
     <div class="card-body" id="principal">
         <div class="d-flex flex-row">
             <button class="p-2 btn btn-primary" onclick="acessarCliente(event)">Acessar Cliente</button>
-            <button id="acessarPasta" class="p-2 btn btn-warning" url="" onclick="openPasta(event)">Acessar Pasta</button>
+            <button id="acessarPasta" class="p-2 btn btn-warning" url="" onclick="openPasta(event)">Acessar
+                Pasta</button>
         </div>
         <!-- <div class="row">
             <div class="form-group col-md-6 col-12">
@@ -41,57 +49,9 @@
     <div id="teste"></div>
 </div>
 <div id="waitasec" class="waitasec">
-    <img style="position: absolute; left: 40%; top: 40%;" src="https://www.tekkno.com.br/loja/assets/img/carregando.jpg" alt="" width="200">
+    <img style="position: absolute; left: 40%; top: 40%;" src="https://www.tekkno.com.br/loja/assets/img/carregando.jpg"
+        alt="" width="200">
 </div>
-<style>
-    .waitasec {
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(19, 40, 78, 0.9);
-        cursor: wait;
-    }
-    
-    .cliente:hover {
-        background-color: rgba(19, 40, 78, .255)
-    }
-    
-    .more-details {
-        display: none;
-    }
-    
-    .cliente {
-        border: 1px solid rgba(0, 0, 0, .125);
-        padding: 15px;
-        margin: 10px;
-        border-radius: 15px;
-        line-height: 120%;
-    }
-    
-    .clienteT {
-        border: 1px solid rgba(0, 0, 0, .125);
-        background-color: rgba(19, 40, 78, .255);
-        padding: 15px;
-        margin: 10px;
-        border-radius: 15px;
-        line-height: 120% !important;
-        text-align: center;
-    }
-    
-    .dado {
-        line-height: 250% !important;
-    }
-    
-    .clienteativo {
-        background-color: rgba(121, 180, 66, .255)
-    }
-    
-    .clienteinativo {
-        background-color: rgba(197, 27, 27, 0.255)
-    }
-</style>
 <script>
     var idCliente = ""
     var dados = ""
@@ -117,23 +77,6 @@
         var url = $(event.target).attr('url')
         window.open(url)
     }
-    $(function() {
-        var id = $.cookie('clientID')
-        window.idCliente = id
-
-        var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getClientById&id=" + id
-
-        $.getJSON(url, function(data) {
-            var dados = data.cliente
-            showClient(dados)
-        }).done(function() {
-            $("#waitasec").hide()
-        }).fail(function() {
-            $("#waitasec").hide(400)
-        })
-
-        $.removeCookie('clientID')
-    })
 
     function expandDados(event) {
         var div = $(event.target)
@@ -145,35 +88,81 @@
         }
     }
 
-    function showClient(dados) {
-        window.dados = dados
-        $("#prospectNome").append(dados[2])
-        $("#acessarPasta").attr("url", dados[11])
+    function showPropostasCliente(dados) {
+        addPropostaScreen(dados)
     }
 
-    $.getJSON("https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getAllClientsData",
-        function(dados) {
-            $("#waitasec").hide()
-            var cli = dados.clientes
-            var cab = cli.shift()
-            cli.forEach(e => {
-                var class1 = e[9] == 1 ? "clienteativo" : "clienteinativo"
-                var site = (e[8]).split(":")
-                var site = e[8] == "" ? "" : (site[0] == "http" ? e[8] : "http://" + e[8])
-                var dado = `<div class="row cliente ${class1}" onclick="expandDados(event)" clienteID="${e[0]}" clientName="${e[2]}">
-                        <div class="col-md-1 col-1 dado">${e[0]}</div>
-            <div class="col-md-3 col-12 dado">${e[2]}</div>
-            <div class="col-md-3 col-12 dado">${e[4]}</div>
-            <div class="col-md-2 col-12 dado">${e[6]}</div>
-            <div class="col-md-3 col-12 dado"><a href="mailto:${e[7]}">${e[7]}</a></div>
-            <div class="more-details row col-md-12 col-12">
-                <button class="btn btn-success" onclick="acessarPropostas(event)">Acessar Proposta no Docs</button>
-                <button class="btn btn-primary" onclick="acessarCliente(event)">Download Proposta PDF</button>
-                <button class="btn btn-warning" url="${e[11]}" onclick="openPasta(event)">Editar Proposta Plataforma</button>
+    $(function () {
+        var id = $.cookie('clientID')
+        window.idCliente = id
+
+        if (id) { } else {
+            var url = window.location.href
+
+            var u0 = url.split("?")
+
+            var u1 = u0[1] ? u0[1] : false
+
+            if (u1) {
+                var u2 = u1.split("=")
+                var u3 = u2[0] == "id" ? u2[1] : false
+                if (u3) {
+                    window.idCliente = u3
+                }
+            } else {
+                $("#alterar").attr("disabled", true)
+            }
+        }
+        
+        id = window.idCliente
+        $.removeCookie('clientID')
+        var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getClientById&id=" + id
+
+        $.getJSON(url, function (data) {
+            console.log(data)
+            var dados = data.cliente
+            window.dadosCliente = dados
+        }).done(function () {
+            var url1 = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getPropostasByClientId&id=" + id
+
+            $.getJSON(url1, function (data) {
+                console.log(data)
+                var dados = data
+                showPropostasCliente(dados)
+                window.propostas = dados
+            }).done(function () {
+                $("#waitasec").hide()
+            }).fail(function () {
+                $("#waitasec").hide(400)
+            })
+        }).fail(function () {
+            $("#waitasec").hide(400)
+        })
+    })
+
+    function addPropostaScreen(dados) {
+        $("#waitasec").hide()
+        $("#acessarPasta").attr("url",window.dadosCliente[11])
+        $("#prospectNome").append(" " + window.dadosCliente[2])
+        $("title").html("Proposta "+window.dadosCliente[2])
+        var cab = dados
+        cab.forEach(e => {
+            var dado = `<div class="row cliente" onclick="expandDados(event)" clienteID="${e[1]}" propostaCod="${e[0]}"clientName="${e[2]}">
+                    <div class="col-md-1 col-12">${e[0]}</div>
+            <div class="col-md-1 col-12">${e[1]}</div>
+            <div class="col-md-4 col-12">${e[3]}</div>
+            <div class="col-md-4 col-12">${e[2]}</div>
+            <div class="col-md-2 col-12">${e[4]}</div>
+            <div class="more-details row py-3 col-md-12 col-12">
+                <button class="btn btn-success" url="${e[5]}" onclick="openPasta(event)">Acessar Proposta no Docs</button>
+                <button class="btn btn-primary" url="${e[6]}" onclick="openPasta(event)">Download Proposta PDF</button>
+                <button class="btn btn-warning" url="#" onclick="openPasta(event)">Editar Proposta Plataforma</button>
             </div>
             </div>`
-                $("#principal").append(dado)
-            });
-            atualizarCookies()
-        })
+            $("#principal").append(dado)
+        });
+        atualizarCookies()
+    }
+
+    $.getJSON("")
 </script>
