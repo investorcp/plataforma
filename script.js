@@ -1,28 +1,3 @@
-function addScript(url) {
-    var script = document.createElement('script')
-    script.src = url
-    script.type = 'text/javascript'
-    document.getElementsByTagName('head')[0].appendChild(script)
-}
-
-function addCSS(url) {
-    var css = document.createElement('link')
-    css.rel='stylesheet'
-    css.href = url
-    document.getElementsByTagName('head')[0].appendChild(css)
-}
-
-addCSS('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
-addCSS('https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css')
-addCSS('style.css')
-addScript('https://unpkg.com/axios/dist/axios.min.js')
-addScript('https://code.jquery.com/jquery-3.3.1.min.js')
-addScript('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
-addScript('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
-addScript('https://kit.fontawesome.com/bdaea6cd67.js')
-addScript('https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js')
-addScript('https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.8/inputmask/bindings/inputmask.binding.min.js')
-
 $("body").delegate("#newPropose", "click", function () {
     navegar("novaProposta")
 })
