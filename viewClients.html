@@ -101,9 +101,11 @@
         var div = $(event.target)
         var parent = $(div).parents(".cliente")
         var divH = $(parent).children(".more-details")
+        var icon = $(parent).children(".abrirIcon")
         var tipo = $(div).prop("tagName")
         if (tipo != "BUTTON") {
             $(divH).toggle(100)
+            $(icon).toggle(100)
         }
     }
 
@@ -175,6 +177,8 @@
                 <button class="btn btn-primary" onclick="acessarCliente(event)">Acessar Cliente</button>
                 <button class="btn btn-warning" url="${e[11]}" onclick="openPasta(event)">Acessar Pasta</button>
             </div>
+            <i style="position: absolute; right: 15px; top:40%;" class="fas fa-angle-down abrirIcon"></i>
+            <i style="display: none; position: absolute; right: 15px; top:40%;" class="fas fa-angle-up abrirIcon"></i>
             </div>`
                 $("#principal").append(dado)
             });

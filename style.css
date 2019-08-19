@@ -75,10 +75,6 @@ body {
     cursor: wait;
 }
 
-.cliente:hover {
-    background-color: rgba(19, 40, 78, .255)
-}
-
 .more-details {
     display: none;
 }
@@ -89,6 +85,7 @@ body {
     margin: 10px;
     border-radius: 15px;
     line-height: 120%;
+    position: relative;
 }
 
 .clienteT {
@@ -110,4 +107,24 @@ body {
 
 .clienteinativo {
     background-color: rgba(197, 27, 27, 0.255)
+}
+
+.clienteativo:hover {
+    background-color: rgba(121, 180, 66, .4)
+}
+
+.clienteinativo:hover {
+    background-color: rgba(197, 27, 27, 0.4)
+}
+
+.mini-card {
+    border: 1px solid rgba(0, 0, 0, .125);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 15px;
+    line-height: 120% !important;
+}
+
+.titulo {
+    cursor: pointer;
 }

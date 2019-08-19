@@ -1,228 +1,262 @@
-<div class="card">
-    <div class="card-header">
-        <h4>Nova Proposta Valuation Patrimonial Contábil</h4>
-        <small class="text-info">Preencha os campos abaixo para construir a proposta de orçamento do
-            cliente.</small>
+<!DOCTYPE html>
+<!-- Desenvolvido por Paulo Moisés. Em dúvidas sobre a edição, entre em contato pelo site: www.paulomoises.com ou pelo email: paulomoises_silva@hotmail.com -->
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png"
+        href="https://investorcp.com/wp-content/uploads/2019/05/investorcp.com-favicon.png" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/locales/pt-br.min.js"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArffpRRcX7uR27n-g_CrYsQk_ZlFT9_iw&libraries=places"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/bdaea6cd67.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cliente</title>
+</head>
+
+<body>
+    <div id="nav">
     </div>
-    <div id="forms" class="card-body">
-        <form onsubmit="return novaProposta(event)">
-            <div class="form-group">
-                <label for="codigoproposta">Código da Proposta</label>
-                <input type="text" class="form-control" id="codigoproposta" placeholder="Insira o código da proposta"
-                    required>
-            </div>
-            <div class="form-group">
-                <label for="nomefantasia">Nome da Empresa</label>
-                <input type="text" class="form-control" id="nomefantasia" placeholder="Insira o Nome da Empresa"
-                    required>
-            </div>
-            <div class="form-group">
-                <label for="saudacao">Saudação</label>
-                <select class="form-control" id="saudacao" required>
-                    <option disabled selected>Selecione</option>
-                    <option>Sr.</option>
-                    <option>Sra.</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="nomecliente">Nome do Cliente</label>
-                <input type="text" class="form-control" id="nomecliente" placeholder="Insira o Nome do Cliente"
-                    required>
-            </div>
-            <div class="form-group">
-                <label for="nomecliente">Empresa(s) a ser(em) incorporada(s)</label><br />
-                <small>Para inserir mais de uma empresa, separe os nomes por vírgulas.</small><br />
-                <small>Ex: Empresa 1, Empresa 2, Empresa 3</small><br />
-                <textarea class="form-control" id="nomecliente" placeholder="Insira o Nome do Cliente" required>
-            </div>
-            <div class="form-group">
-                <label for="cidadeproposta">Nome da Cidade</label>
-                <input type="text" class="form-control" id="cidadeproposta" value="Belo Horizonte"
-                    placeholder="Insira o Nome da Cidade" required>
-            </div>
-            <div class="form-group">
-                <label for="datafundacao">Data da Proposta</label>
-                <input type='text' class="form-control input-data hoje" id='datafundacao' required>
-            </div>
-            <div class="form-group">
-                <label for="ultimosexercicios">Últimos Exercícios</label>
-                <input type="text" class="form-control ultimos3anos" id="ultimosexercicios" placeholder="" required>
-            </div>
+    <div>
+        <div class="container-fluid mt-4">
             <div class="row">
-                <div class="col-md-4 col-12 form-group">
-                    <label for="valorass">Valor na Assinatura</label>
-                    <input type="text" class="form-control reais" id="valorass" placeholder="" required>
-                </div>
-                <div class="col-md-4 col-12 form-group">
-                    <label for="valorent">Valor na Entrega</label>
-                    <input type="text" class="form-control reais" id="valorent" placeholder="" required>
-                </div>
-                <div class="col-md-4 col-12 form-group">
-                    <label for="valortotal">Valor Total</label>
-                    <input type="text" class="form-control reais" id="valortotal" placeholder="" required>
+                <div class="col-12">
+                    <p>Comercial > Proposta > Nova Proposta</p>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="impostos">Impostos</label>
-                <select class="form-control" id="impostos" required>
-                    <option disabled selected>Selecione</option>
-                    <option value="com">Valor com imposto</option>
-                    <option value="sem">Valor sem imposto</option>
-                </select><br />
-                <small class="text-info" id="resultadoimposto"></small>
+            <h1>Criar nova Proposta</h1>
+            <div class="row">
+                <div class="col-md-3 col-12"></div>
+                <div class="col-md-6 col-12">
+                    <div style="text-align: center;" class="card row mx-3 px-3 py-3">
+                        <div class="col-12 form-group escolha" id="prospectchoosenP">
+                            <label class="h4" for="prospectchoosen">Selecione um Prospect</label>
+                            <select class="form-control" id="prospectchoosen">
+                                <option disabled selected>Selecione</option>
+                            </select>
+                        </div>
+                        <div class="col-12 form-group escolha" id="escolherpropostaP">
+                            <label class="h4" for="escolherproposta">Selecione um modelo</label>
+                            <select class="form-control" id="escolherproposta">
+                                <option disabled selected>Selecione</option>
+                            </select>
+                        </div>
+                        <div class="px-5 py-3" style="width: 100%">
+                            <button class="btn btn-success btn-block" id="prox" onclick="return criarProposta()" disabled>Próximo</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <input class="btn btn-primary btn-lg btn-block" type="submit" id="gerar" value="Gerar Proposta">
-        </form>
-        <br />
-        <div class="btn btn-success btn-lg btn-block" id="acessarproposta" hidden>Acessar Proposta</div>
+        </div>
     </div>
-</div>
-<script>
-    String.prototype.capitalize = function () {
-        return this.charAt(0).toUpperCase() + this.slice(1);
-    }
+    <div id="waitasec" class="waitasec">
+        <img style="position: absolute; left: 40%; top: 40%;"
+            src="https://www.tekkno.com.br/loja/assets/img/carregando.jpg" alt="" width="200">
+    </div>
+    <script>
+        var $dados = []
+        var prospectOK = false
+        var propostaOK = false
 
-    $(function () {
-        $('#valorent').on("change", function () {
-            $('#valorent').val(numeral($('#valorent').val()).format('$0,0.00'))
-            let valor = numeral($('#valorass').val()).value() + numeral($('#valorent').val()).value()
-            $('#valortotal').val(numeral(valor).format('$0,0.00'))
+        $(function () {
+            var time = setInterval(function () {
+                if (prospectOK && propostaOK) {
+                    clearInterval(time)
+                    $("#waitasec").hide()
+                }
+            }, 100)
         })
-    })
-
-    $(function () {
-        $('#valorass').on("change", function () {
-            $('#valorass').val(numeral($('#valorass').val()).format('$0,0.00'))
-            let valor = numeral($('#valorass').val()).value() + numeral($('#valorent').val()).value()
-            $('#valortotal').val(numeral(valor).format('$0,0.00'))
+        $("#acessarproposta").on("click", function () {
+            window.open($("#acessarproposta").attr("link"))
         })
-    })
 
-    $(function () {
-        $('#impostos').on("change", function () {
-            let val = $('#impostos').val()
-            let imp = $('#resultadoimposto')
-            if (val == "com") {
-                imp.html("Os honorários descritos acima são líquidos de PIS (0,65%), COFINS (3,0%) e ISS (5%). Portanto, a empresa contratante pagará à Investor o valor bruto dos serviços.")
-            } else {
-                imp.html("Os referidos honorários abrangem todos os tributos (impostos, taxas, emolumentos, contribuições fiscais e parafiscais).")
+        $(function () {
+
+            var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getAllClientsData"
+
+            function success(data) {
+                var d = data.clientes
+                window.prospectOK = true
+                showProspects(d)
+                $.removeCookie('clientesData')
+                $.cookie('clientesData', data, {
+                    expires: 7,
+                    path: '/'
+                })
             }
+
+            function failure(e) {
+                console.error(e)
+                alert("Erro em obter lista de prospects.")
+                $("#waitasec").hide()
+            }
+
+            $.getJSON(url, function (d) {
+                success(d)
+            }).fail(function (e) {
+                failure(e)
+            })
         })
-    })
 
-    $(function () {
-        $('.input-data').datepicker({
-            format: 'dd/mm/yyyy'
-        });
-    });
+        $(function () {
 
-    $(function () {
-        var data = new Date()
-        var dia = data.getDate()
-        var mes = data.getMonth() + 1
-        var ano = data.getFullYear()
-        if (dia.toString().length != 2) {
-            dia = "0" + dia.toString()
-        }
-        if (mes.toString().length != 2) {
-            mes = "0" + mes.toString()
-        }
-        $('.hoje').val(dia + "/" + mes + "/" + ano)
+            var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getModelos"
 
-        function codSeq(a) {
-            var cid = a[0][0].toString()
-            var seq = a[0][1].toString()
-            var ano = a[0][2].toString()
-            if (cid.length != 2) {
-                cid = "0" + cid
+            function success(data) {
+                var d = data.prospects
+                window.propostaOK = true
+                showModelos(d)
             }
-            while (seq.length != 4) {
-                seq = "0" + seq
+
+            function failure(e) {
+                console.error(e)
+                alert("Erro em obter lista de prospects.")
+                $("#waitasec").hide()
             }
-            var data = cid + seq + ano
-            $('#codigoproposta').val(data)
-        }
-        function failure() {
-            alert("Não foi possível recuperar o código da proposta.")
-        }
-        google.script.run.withSuccessHandler(codSeq).withFailureHandler().getProp()
-    })
-    function whichMon(a) {
-        var m = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
-        var r = m[(a - 1)]
-        return r
-    }
 
-    function novaProposta(e) {
+            $.getJSON(url, function (d) {
+                success(d)
+            }).fail(function (e) {
+                failure(e)
+            })
+        })
 
-        e.preventDefault()
+        function addForm(e) {
+            $("#escolherpropostaP").animate({
+                height: 'hide',
+                opacity: '0.3'
+            });
+            $('#formsP').html(e)
+            $("#formsP").animate({
+                height: 'show'
+            });
 
-        $("#gerar").attr("disabled", true)
-
-        // Para pegar todos os dados preenchidos
-        var codigoproposta = $("#codigoproposta").val()
-        google.script.run.saveProp(codigoproposta)
-        var nomefantasia = $("#nomefantasia").val()
-        var saudacao = $("#saudacao").val()
-        var nomecliente = $("#nomecliente").val()
-        var cidadeproposta = $("#cidadeproposta").val()
-        var datafundacao = $("#datafundacao").val()
-        var dia = datafundacao.split("/")[0]
-        var mes = datafundacao.split("/")[1]
-        mes = whichMon(mes).capitalize()
-        var ano = datafundacao.split("/")[2]
-        var ultimosexercicios = $("#ultimosexercicios").val()
-        var valorass = $("#valorass").val()
-        var valorent = $("#valorent").val()
-        var valortotal = $("#valortotal").val()
-        var impostos = $("#impostos").val()
-        var imp1 = "Os honorários descritos acima são líquidos de PIS (0,65%), COFINS (3,0%) e ISS (5%). Portanto, a empresa contratante pagará à Investor o valor bruto dos serviços."
-        var imp2 = "Os referidos honorários abrangem todos os tributos (impostos, taxas, emolumentos, contribuições fiscais e parafiscais)."
-        if (impostos == "com") {
-            var imp3 = imp1
-        } else {
-            var imp3 = imp2
-        }
-        var array1 = [codigoproposta, nomefantasia, saudacao, nomecliente, cidadeproposta, dia, mes, ano, ultimosexercicios, valorass, valorent, valortotal, imp3]
-
-        function success(url) {
-            $("#acessarproposta").attr("hidden", false)
-            $("#acessarproposta").attr("link", url)
-            $("#gerar").attr("disabled", false)
-            alert("Proposta Gerada")
-
-            // Para limpar o form
-            $("#codigoproposta").val("")
-            $("#nomefantasia").val("")
-            $("#saudacao").val("")
-            $("#nomecliente").val("")
-            $("#cidadeproposta").val("")
-            $("#datafundacao").val("")
-            $("#ultimosexercicios").val("")
-            $("#valorass").val("")
-            $("#valorent").val("")
-            $("#valortotal").val("")
-            $("#impostos").val("")
+            var cliente = $dados[0]
+            $("#razaosocial").val(cliente[1])
+            $("#nomefantasia").val(cliente[2])
+            $("#cnpj").val(cliente[3])
+            $("#nomecliente").val(cliente[4])
+            $("#nomeavaliada, .nomeavaliada").val(cliente[5])
+            $("#telefone").val(cliente[6])
+            $("#email").val(cliente[7])
+            $("#site").val(cliente[8])
         }
 
-        function failure() {
-            $("#gerar").attr("disabled", false)
-            alert("Erro em gerar proposta.")
+        $(function () {
+            var btnSelectProspects = $('#prospectchoosen')
+            btnSelectProspects.on("change", function () {
+                $("#waitasec").show()
+                var a = btnSelectProspects.val()
+                function failure(e) {
+                    $("#waitasec").hide()
+                    console.error(e)
+                    alert("Erro em encontrar cliente.")
+                }
+
+                function success(array1) {
+                    var dadosS = JSON.stringify({ dados: array1 })
+                    $.cookie('clienteData', dadosS, {
+                        expires: 7,
+                        path: '/'
+                    })
+                    $("#waitasec").hide()
+                    if ($('#escolherproposta').val()) {
+                        $("#prox").attr("disabled", false)
+                    }
+                    //dadosCliente = array1
+                    //$dados.push(dadosCliente)
+                    // document.dadosCliente = array1
+                    // $("#prospectchoosenP,#escolherpropostaP").animate({
+                    //     height: 'toggle'
+                    // });
+                }
+
+                var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getClientById&id=" + a
+
+                $.getJSON(url, function (data) {
+                    var dados = data.cliente
+                    success(dados)
+                }).done(function () {
+
+                }).fail(function () {
+                    failure(e)
+                })
+            })
+        })
+
+        $(function () {
+            var btnSelectModelo = $('#escolherproposta')
+            btnSelectModelo.on("change", function () {
+                propostaEscolhida = btnSelectModelo.val()
+                $dados.push(propostaEscolhida)
+                if ($('#prospectchoosen').val()) {
+                    $("#prox").attr("disabled", false)
+                }
+                function falha(e) {
+                    console.error(e)
+                    alert("Proposta Não Encontrada")
+                }
+
+                console.log($(btnSelectModelo).val())
+            })
+        })
+
+        function criarProposta(){
+            var btn = $('#escolherproposta')
+            var prop = "novaproposta/" + $(btn).val()
+                var win = window.open(prop)
+                var timer = setInterval(function () {
+                    if (win.closed) {
+                        clearInterval(timer)
+                        window.location.reload(true)
+                    }
+                }, 100)
+                return false
+        }
+        function showProspects(a) {
+            var op = document.getElementById("prospectchoosen")
+            var b = ""
+            a.forEach(function (x) {
+                if (x[9] == 1) {
+                    b += `<option value="${x[0]}">${x[2]}</option>`
+                }
+            })
+
+            op.innerHTML += b
         }
 
-        google.script.run.withSuccessHandler(success).withFailureHandler(failure).Valuation01(array1)
+        function showModelos(a) {
+            var op = document.getElementById("escolherproposta")
+            var b = ""
+            a.forEach(function (x) {
+                b += `<option value="${x[1]}">${x[0]}</option>`
+            })
+            op.innerHTML += b
+        }        
+    </script>
 
-        return false
-    }
-    $("#acessarproposta").on("click", function () {
-        window.open($("#acessarproposta").attr("link"))
-    })
-    $(function () {
-        let data = new Date()
-        let ano = data.getFullYear() - 1
-        let lAno = ano - 2
-        let frase = lAno + " à " + ano
-        $('.ultimos3anos').val(frase)
-    })
+</body>
 
-</script>
+</html>

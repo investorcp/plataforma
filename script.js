@@ -20,7 +20,16 @@ $(function () {
     $.get("navbar.html", function (data) {
         $("#nav").html(data)
         addFun()
+    }).fail(function(){
+        $.get("../navbar.html", function (data) {
+            $("#nav").html(data)
+            addFun()
+        })
     })
+})
+
+$(function () {
+    
 })
 
 $(function () {
