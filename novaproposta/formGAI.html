@@ -12,7 +12,6 @@
         href="https://investorcp.com/wp-content/uploads/2019/05/investorcp.com-favicon.png" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/locales/pt-br.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
@@ -32,6 +31,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArffpRRcX7uR27n-g_CrYsQk_ZlFT9_iw&libraries=places"></script>
     <link rel="stylesheet" href="../style.css">
     <script src="../script.js"></script>
+    <script src="propostas.js"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Nova Proposta</title>
 </head>
@@ -231,7 +231,7 @@
                                 </div>
                                 <div class="form-group col-12">
                                     <label for="enderecoGai">Endereço da empresa</label>
-                                    <input type="text" class="form-control" id="enderecoGai" placeholder="Endereço"
+                                    <input type="text" class="form-control endereco" id="enderecoGai" placeholder="Endereço"
                                         required>
                                 </div>
                             </div>
@@ -477,13 +477,6 @@ Entrega da base saneada.</textarea>
     </div>
 
     <script>
-        // Autocomplete Google Address
-        function initialize() {
-            var input = document.getElementById('enderecoGai');
-            new google.maps.places.Autocomplete(input);
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-
         // Variáveis Globais
         var avaliacaoValorJusto = 0
         var avaliacaoTesteImpairment = 0
@@ -492,25 +485,7 @@ Entrega da base saneada.</textarea>
         var dadosCliente = []
 
         // Funções
-        $(function () {
-            addForm()
-        })
-        function addForm() {
-            var d0 = $.cookie('clienteData')
-            var d1 = JSON.parse(d0)
-            var cliente = d1.dados
-            window.dadosCliente = cliente
-            $("#razaosocial").val(cliente[1])
-            $("#nomefantasia").val(cliente[2])
-            $("title").append(" - " + cliente[2])
-            $("#cnpj").val(cliente[3])
-            $("#nomecliente").val(cliente[4])
-            $("#nomeavaliada, .nomeavaliada").val(cliente[5])
-            $("#telefone").val(cliente[6])
-            $("#email").val(cliente[7])
-            $("#site").val(cliente[8])
-        }
-
+        
         function next1(event) {
             event.preventDefault()
             var a = event.target
@@ -550,6 +525,7 @@ Entrega da base saneada.</textarea>
                 }
             })
         })
+
         $(function () {
             $('#diasEntregaLaudoFinal').on('keyup paste change', function () {
                 var dias = $("#diasEntregaLaudoFinal").val()
@@ -561,6 +537,7 @@ Entrega da base saneada.</textarea>
                 }
             })
         })
+
         $(function () {
             $('#saudacao, #nomecliente, #nomefantasia, #tipoDeServico').on('keyup paste change', function () {
                 var comp = $("#tipoDeServico").val()
@@ -587,10 +564,6 @@ Entrega da base saneada.</textarea>
 
             })
         })
-
-        String.prototype.capitalize = function () {
-            return this.charAt(0).toUpperCase() + this.slice(1);
-        }
 
         $(document).on('change', function () {
             $(".checkbox-icp").each(function (x) {
@@ -883,7 +856,7 @@ Entrega da base saneada.</textarea>
             $("#gerar").attr("disabled", true)
             $("#waitasec").show()
 
-            var array1 = getDataForm("#gaiform")
+            var array1 = getDataForm("gaiform")
 
             function success(url) {
                 $("#waitasec").hide()
@@ -900,7 +873,7 @@ Entrega da base saneada.</textarea>
                 alert("Erro em gerar proposta.")
                 console.error(e)
                 console.log("Envie esse código ao setor de Tecnologia:")
-                console.log(getDataForm("#gaiform"))
+                console.log(getDataForm("gaiform"))
             }
             
             var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=propostaGAI&array1="+array1
@@ -941,10 +914,6 @@ Entrega da base saneada.</textarea>
 
             return obj2
         }
-
-        $("#acessarproposta").on("click", function () {
-            window.open($("#acessarproposta").attr("link"))
-        })
 
         $(function () {
             let data = new Date()
