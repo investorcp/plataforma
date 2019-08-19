@@ -185,8 +185,9 @@
             $("#gerar").attr("disabled", false)
             alert("Erro em gerar proposta.")
             console.error(e)
-            console.log("Envie esse código ao setor de Tecnologia:")
+            console.log("Salve esse código para que Setor de Tecnologia da Investor consiga salvar a proposta:")
             console.log(getDataForm("form"))
+            erroNaProposta(getDataForm("form"))
         }
 
         var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=propostaCI&array1=" + array1

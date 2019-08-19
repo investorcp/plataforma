@@ -231,8 +231,8 @@
                                 </div>
                                 <div class="form-group col-12">
                                     <label for="enderecoGai">Endereço da empresa</label>
-                                    <input type="text" class="form-control endereco" id="enderecoGai" placeholder="Endereço"
-                                        required>
+                                    <input type="text" class="form-control endereco" id="enderecoGai"
+                                        placeholder="Endereço" required>
                                 </div>
                             </div>
                         </div>
@@ -462,13 +462,15 @@ Entrega da base saneada.</textarea>
                         </div>
                     </div>
                 </div>
-                <input class="btn btn-primary btn-lg btn-block" type="submit" name="gerar" id="gerar" value="Gerar Proposta">
+                <input class="btn btn-primary btn-lg btn-block" type="submit" name="gerar" id="gerar"
+                    value="Gerar Proposta">
             </form>
             <br />
-            <div class="btn btn-success btn-lg btn-block" style="display: none;" id="acessarproposta">Editar Proposta Docs
+            <div class="btn btn-success btn-lg btn-block" style="display: none;" id="acessarproposta">Editar Proposta
+                Docs
             </div>
             <div class="btn btn-warning btn-lg btn-block" style="display: none;" id="acessarpdf">Acessar Proposta PDF
-                </div>
+            </div>
         </div>
     </div>
     <div id="waitasec" style="display: none;" class="waitasec">
@@ -485,7 +487,7 @@ Entrega da base saneada.</textarea>
         var dadosCliente = []
 
         // Funções
-        
+
         function next1(event) {
             event.preventDefault()
             var a = event.target
@@ -840,7 +842,7 @@ Entrega da base saneada.</textarea>
             }).done(function () {
             }).fail(function () {
                 failure(e)
-            })  
+            })
         })
 
         function whichMon(a) {
@@ -872,11 +874,12 @@ Entrega da base saneada.</textarea>
                 $("#gerar").attr("disabled", false)
                 alert("Erro em gerar proposta.")
                 console.error(e)
-                console.log("Envie esse código ao setor de Tecnologia:")
-                console.log(getDataForm("gaiform"))
+                console.log("Salve esse código para que Setor de Tecnologia da Investor consiga salvar a proposta:")
+                console.log(getDataForm("form"))
+                erroNaProposta(getDataForm("form"))
             }
-            
-            var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=propostaGAI&array1="+array1
+
+            var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=propostaGAI&array1=" + array1
 
             $.getJSON(url, function (data) {
                 success(data)
@@ -904,11 +907,13 @@ Entrega da base saneada.</textarea>
                 obj1[$(form[i]).attr("id")] = $(form[i]).val()
             }
 
-            var ml = obj1["margemdelucro"]
+            if (obj1["margemdelucro"]) {
+                var ml = obj1["margemdelucro"]
 
-            var m1 = ml.replace("%","")
-            ml0 = parseFloat(ml)/100
-            obj1["margemdelucro"] = ml0
+                var m1 = ml.replace("%", "")
+                ml0 = parseFloat(ml) / 100
+                obj1["margemdelucro"] = ml0
+            }
 
             var obj2 = JSON.stringify(obj1)
 

@@ -42,7 +42,7 @@ $(camposReq())
 
 // Autocomplete Google Address
 function initialize() {
-    $(".endereco").each(function(x){
+    $(".endereco").each(function (x) {
         var input = $($(".endereco")[x])[0]
         new google.maps.places.Autocomplete(input);
     })
@@ -94,17 +94,31 @@ $(function () {
     }).done(function () {
     }).fail(function () {
         failure(e)
-    })  
+    })
 })
 
-function whichMon(a){
-var m = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"]
-var r = m[(a-1)]
-return r
+function erroNaProposta(e) {
+
+    var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=erroSalvar&array1="+e
+
+    $.getJSON(url, function (data) {
+        var message = `Um email foi enviado para o Setor de Tecnologia da Investor.\nPor favor, entre em contato para gerar a proposta.`
+        console.log(message)
+        alert(message)
+    }).done(function () {
+    }).fail(function () {
+        console.error(e)
+    })
+}
+
+function whichMon(a) {
+    var m = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
+    var r = m[(a - 1)]
+    return r
 }
 
 function getDataForm(id) {
-    var form = $("#"+id)[0]
+    var form = $(id)[0]
     var n = form.length
     var array1 = [
         [],
@@ -115,6 +129,15 @@ function getDataForm(id) {
     for (i = 0; i < n; i++) {
         obj1[$(form[i]).attr("id")] = $(form[i]).val()
     }
+
+    if (obj1["margemdelucro"]) {
+        var ml = obj1["margemdelucro"]
+
+        var m1 = ml.replace("%", "")
+        ml0 = parseFloat(ml) / 100
+        obj1["margemdelucro"] = ml0
+    }
+
     var obj2 = JSON.stringify(obj1)
 
     return obj2

@@ -12,7 +12,6 @@
         href="https://investorcp.com/wp-content/uploads/2019/05/investorcp.com-favicon.png" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/locales/pt-br.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
@@ -40,7 +39,7 @@
     </div>
     <div class="card">
         <div class="card-header">
-            <h4>Nova Proposta Valuation</h4>
+            <h4>Nova Proposta Valuation Patrimonial Contábil</h4>
             <small class="text-info">Preencha os campos abaixo para construir a proposta de orçamento do
                 cliente.</small>
         </div>
@@ -68,6 +67,18 @@
                     <label for="nomecliente">Nome do Cliente</label>
                     <input type="text" class="form-control" id="nomecliente" placeholder="Insira o Nome do Cliente"
                         required>
+                </div>
+                <div class="form-group">
+                    <label for="finsp">Fins da Proposta</label>
+                    <input type="text" class="form-control" id="finsp" placeholder="Insira os fins dessa proposta"
+                        value="para fins de incorporação" required>
+                </div>
+                <div class="form-group" style="line-height: 100% !important;">
+                    <label for="empresasincorporadas">Empresa(s) a ser(em) avaliada(s)</label><br />
+                    <small>Para inserir mais de uma empresa, separe os nomes por vírgulas.</small><br />
+                    <small>Ex: Empresa 1, Empresa 2, Empresa 3</small><br />
+                    <textarea class="form-control nomeavaliada" id="empresasincorporadas"
+                        placeholder="Insira o Nome da(s) Empresa(s)" rows="3" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="cidadeproposta">Nome da Cidade</label>
@@ -119,8 +130,6 @@
             src="https://www.tekkno.com.br/loja/assets/img/carregando.jpg" alt="" width="200">
     </div>
 </body>
-<script src="../script.js"></script>
-<script src="propostas.js"></script>
 <script>
     $(function () {
         $('#valorent').on("change", function () {
@@ -165,7 +174,7 @@
             erroNaProposta(getDataForm("form"))
         }
 
-        var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=Valuation01&array1=" + array1
+        var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=ValPatCont&array1=" + array1
 
         $.getJSON(url, function (data) {
             success(data)
@@ -177,5 +186,7 @@
         return false
     }
 </script>
+<script src="../script.js"></script>
+<script src="propostas.js"></script>
 
 </html>
