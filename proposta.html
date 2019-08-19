@@ -43,220 +43,64 @@
         <div class="container-fluid mt-4">
             <div class="row">
                 <div class="col-12">
-                    <p>Comercial > Proposta > Nova Proposta</p>
+                    <p>Comercial > Proposta</p>
                 </div>
             </div>
-            <h1>Criar nova Proposta</h1>
             <div class="row">
-                <div class="col-md-3 col-12"></div>
-                <div class="col-md-6 col-12">
-                    <div style="text-align: center;" class="card row mx-3 px-3 py-3">
-                        <div class="col-12 form-group escolha" id="prospectchoosenP">
-                            <label class="h4" for="prospectchoosen">Selecione um Prospect</label>
-                            <select class="form-control" id="prospectchoosen">
-                                <option disabled selected>Selecione</option>
-                            </select>
+                    <div class="col-lg-2 d-lg-block">
+                        <div class="card">
+                            <div class="card-header card-header-icp">
+                                Propostas Recentes
+                            </div>
+                            <div class="card-body card-header-icp">
+                                Lista com propostas recentes
+                            </div>
                         </div>
-                        <div class="col-12 form-group escolha" id="escolherpropostaP">
-                            <label class="h4" for="escolherproposta">Selecione um modelo</label>
-                            <select class="form-control" id="escolherproposta">
-                                <option disabled selected>Selecione</option>
-                            </select>
+                    </div>
+                    <div class="col-lg-10 col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Proposta</h4>
+                                        <small class="text-info">Esta é uma aba reservada para criação de novas
+                                            propostas.</small>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="btn btn-success acc-link" icp-link="novaProposta.html" id="newPropose">Nova Proposta</div>
+                                        <div class="btn btn-success" id="oldPropose">Propostas Realizadas</div>
+                                        <div class="btn btn-success" id="summary">Resumo</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="px-5 py-3" style="width: 100%">
-                            <button class="btn btn-success btn-block" id="prox" onclick="return criarProposta()" disabled>Próximo</button>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Resumo esta semana
+                                    </div>
+                                    <div class="card-body">
+                                        <i class="fas fa-cogs"></i> Em Construção
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Resumo Semana anterior
+                                    </div>
+                                    <div class="card-body">
+                                        <i class="fas fa-cogs"></i> Em Construção
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="waitasec" class="waitasec">
-        <img style="position: absolute; left: 40%; top: 40%;"
-            src="https://www.tekkno.com.br/loja/assets/img/carregando.jpg" alt="" width="200">
-    </div>
-    <script>
-        var $dados = []
-        var prospectOK = false
-        var propostaOK = false
-
-        $(function () {
-            var time = setInterval(function () {
-                if (prospectOK && propostaOK) {
-                    clearInterval(time)
-                    $("#waitasec").hide()
-                }
-            }, 100)
-        })
-        $("#acessarproposta").on("click", function () {
-            window.open($("#acessarproposta").attr("link"))
-        })
-
-        $(function () {
-
-            var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getAllClientsData"
-
-            function success(data) {
-                var d = data.clientes
-                window.prospectOK = true
-                showProspects(d)
-                $.removeCookie('clientesData')
-                $.cookie('clientesData', data, {
-                    expires: 7,
-                    path: '/'
-                })
-            }
-
-            function failure(e) {
-                console.error(e)
-                alert("Erro em obter lista de prospects.")
-                $("#waitasec").hide()
-            }
-
-            $.getJSON(url, function (d) {
-                success(d)
-            }).fail(function (e) {
-                failure(e)
-            })
-        })
-
-        $(function () {
-
-            var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getModelos"
-
-            function success(data) {
-                var d = data.prospects
-                window.propostaOK = true
-                showModelos(d)
-            }
-
-            function failure(e) {
-                console.error(e)
-                alert("Erro em obter lista de prospects.")
-                $("#waitasec").hide()
-            }
-
-            $.getJSON(url, function (d) {
-                success(d)
-            }).fail(function (e) {
-                failure(e)
-            })
-        })
-
-        function addForm(e) {
-            $("#escolherpropostaP").animate({
-                height: 'hide',
-                opacity: '0.3'
-            });
-            $('#formsP').html(e)
-            $("#formsP").animate({
-                height: 'show'
-            });
-
-            var cliente = $dados[0]
-            $("#razaosocial").val(cliente[1])
-            $("#nomefantasia").val(cliente[2])
-            $("#cnpj").val(cliente[3])
-            $("#nomecliente").val(cliente[4])
-            $("#nomeavaliada, .nomeavaliada").val(cliente[5])
-            $("#telefone").val(cliente[6])
-            $("#email").val(cliente[7])
-            $("#site").val(cliente[8])
-        }
-
-        $(function () {
-            var btnSelectProspects = $('#prospectchoosen')
-            btnSelectProspects.on("change", function () {
-                $("#waitasec").show()
-                var a = btnSelectProspects.val()
-                function failure(e) {
-                    $("#waitasec").hide()
-                    console.error(e)
-                    alert("Erro em encontrar cliente.")
-                }
-
-                function success(array1) {
-                    var dadosS = JSON.stringify({ dados: array1 })
-                    $.cookie('clienteData', dadosS, {
-                        expires: 7,
-                        path: '/'
-                    })
-                    $("#waitasec").hide()
-                    if ($('#escolherproposta').val()) {
-                        $("#prox").attr("disabled", false)
-                    }
-                    //dadosCliente = array1
-                    //$dados.push(dadosCliente)
-                    // document.dadosCliente = array1
-                    // $("#prospectchoosenP,#escolherpropostaP").animate({
-                    //     height: 'toggle'
-                    // });
-                }
-
-                var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getClientById&id=" + a
-
-                $.getJSON(url, function (data) {
-                    var dados = data.cliente
-                    success(dados)
-                }).done(function () {
-
-                }).fail(function () {
-                    failure(e)
-                })
-            })
-        })
-
-        $(function () {
-            var btnSelectModelo = $('#escolherproposta')
-            btnSelectModelo.on("change", function () {
-                propostaEscolhida = btnSelectModelo.val()
-                $dados.push(propostaEscolhida)
-                if ($('#prospectchoosen').val()) {
-                    $("#prox").attr("disabled", false)
-                }
-                function falha(e) {
-                    console.error(e)
-                    alert("Proposta Não Encontrada")
-                }
-
-                console.log($(btnSelectModelo).val())
-            })
-        })
-
-        function criarProposta(){
-            var btn = $('#escolherproposta')
-            var prop = "novaproposta/" + $(btn).val()
-                var win = window.open(prop)
-                var timer = setInterval(function () {
-                    if (win.closed) {
-                        clearInterval(timer)
-                        window.location.reload(true)
-                    }
-                }, 100)
-                return false
-        }
-        function showProspects(a) {
-            var op = document.getElementById("prospectchoosen")
-            var b = ""
-            a.forEach(function (x) {
-                if (x[9] == 1) {
-                    b += `<option value="${x[0]}">${x[2]}</option>`
-                }
-            })
-
-            op.innerHTML += b
-        }
-
-        function showModelos(a) {
-            var op = document.getElementById("escolherproposta")
-            var b = ""
-            a.forEach(function (x) {
-                b += `<option value="${x[1]}">${x[0]}</option>`
-            })
-            op.innerHTML += b
-        }        
-    </script>
-
 </body>
 
 </html>
