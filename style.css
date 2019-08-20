@@ -128,3 +128,35 @@ body {
 .titulo {
     cursor: pointer;
 }
+
+.alerta {
+    position: fixed;
+    top: 25px;
+    left: 30%;
+    width: 40%;
+    border-style: solid;
+    border-width: 1px;
+    color: #fff;
+    font-weight: bold;
+    background-color: rgba(121, 180, 66, .8);
+    border-color: rgba(196, 224, 169, 1);
+    padding: 20px;
+    border-radius: 5px;
+    line-height: 150% !important;
+}
+
+.alerta .dispensar {
+    position: absolute;
+    top: 40%;
+    right: 5%;
+    cursor: pointer;
+}
+
+.alerta .texto {
+    width: 85%;
+    text-align: center;
+}
+
+.red {
+    color: red;
+}
