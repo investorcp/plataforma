@@ -68,6 +68,17 @@ $(function() {
 })
 
 $(function() {
+    $('.reais').on("change", function() {
+        $('.reais').each(function(x) {
+            if ($('.reais')[x].value != "") {
+                $('.reais')[x].value = numeral($('.reais')[x].value).format('$0,0.00')
+            }
+        })
+    })
+})
+
+
+$(function() {
 
 })
 

@@ -1,12 +1,12 @@
 numeral.locale('pt-br')
-$(function () {
+$(function() {
     addForm()
 })
 
-$("#acessarproposta").on("click", function () {
+$("#acessarproposta").on("click", function() {
     window.open($("#acessarproposta").attr("link"))
 })
-$("#acessarpdf").on("click", function () {
+$("#acessarpdf").on("click", function() {
     window.open($("#acessarpdf").attr("link"))
 })
 
@@ -26,12 +26,12 @@ function addForm() {
     $("#site").val(cliente[8])
 }
 
-String.prototype.capitalize = function () {
+String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 function camposReq() {
-    $("[required]").each(function (x) {
+    $("[required]").each(function(x) {
         var abc = $($($("[required]")[x]).prev())
         $(abc).html($(abc).html() + "*")
     })
@@ -42,20 +42,20 @@ $(camposReq())
 
 // Autocomplete Google Address
 function initialize() {
-    $(".endereco").each(function (x) {
+    $(".endereco").each(function(x) {
         var input = $($(".endereco")[x])[0]
         new google.maps.places.Autocomplete(input);
     })
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 
-$(function () {
+$(function() {
     $('.input-data').datepicker({
         format: 'dd/mm/yyyy'
     });
 });
 
-$(function () {
+$(function() {
     var data = new Date()
     var dia = data.getDate()
     var mes = data.getMonth() + 1
@@ -88,25 +88,23 @@ $(function () {
 
     var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=getProp"
 
-    $.getJSON(url, function (data) {
+    $.getJSON(url, function(data) {
         var dados = data.cod
         codSeq(dados)
-    }).done(function () {
-    }).fail(function () {
+    }).done(function() {}).fail(function() {
         failure(e)
     })
 })
 
 function erroNaProposta(e) {
 
-    var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=erroSalvar&array1="+e
+    var url = "https://script.google.com/macros/s/AKfycbx9wDkstPLn8aS06N4iMMuE6ItVEBG_ZEv4ayh-92jrEpCtA9A0/exec?key=123&user=ninguem&func=erroSalvar&array1=" + e
 
-    $.getJSON(url, function (data) {
+    $.getJSON(url, function(data) {
         var message = `Um email foi enviado para o Setor de Tecnologia da Investor.\nPor favor, entre em contato para gerar a proposta.`
         console.log(message)
-        alert(message)
-    }).done(function () {
-    }).fail(function () {
+        alerta(message, true, 8)
+    }).done(function() {}).fail(function() {
         console.error(e)
     })
 }
@@ -143,8 +141,8 @@ function getDataForm(id) {
     return obj2
 }
 
-$(function () {
-    $('#impostos').on("change", function () {
+$(function() {
+    $('#impostos').on("change", function() {
         let val = $('#impostos').val()
         let imp = $('#resultadoimposto')
         if (val == "com") {
