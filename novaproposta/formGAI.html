@@ -187,34 +187,6 @@
                             </div>
                         </div>
                         <div class="mini-card">
-                            <p class="font-weight-bold">Outras informações</p>
-                            <div class="row">
-                                <div class="form-group col-md-4 col-12">
-                                    <label for="diasAposPag">Dias para Pagarmento após início do Inventário</label>
-                                    <input type="text" class="form-control" id="diasAposPag" placeholder="Dias" required>
-                                    <small class="text-muted" id="infoDiasAposPag"></small>
-                                </div>
-                                <div class="form-group col-md-4 col-12">
-                                    <label for="diasEntregaLaudoFinal">Prazo para Entrega do Laudo Final</label>
-                                    <input type="text" class="form-control" id="diasEntregaLaudoFinal" placeholder="Valor total inventariante" required>
-                                    <small class="text-muted" id="infoDiasEntregaLaudoFinal"></small>
-                                </div>
-                                <div class="form-group col-md-4 col-12">
-                                    <label for="incluitranslado">Esta proposta contempla os gastos com
-                                        traslados?</label>
-                                    <select class="form-control" id="incluitranslado" required>
-                                        <option disabled selected>Selecione</option>
-                                        <option value="sim">Sim</option>
-                                        <option value="não">Não</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-12">
-                                    <label for="enderecoGai">Endereço da empresa</label>
-                                    <input type="text" class="form-control endereco" id="enderecoGai" placeholder="Endereço" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mini-card">
                             <label class="font-weight-bold">Itens que serão Inventariados</label>
                             <div class="checkbox">
                                 <label><input id="checkMaqEEquip" class="checkbox-icp" type="checkbox" value="1">
@@ -284,12 +256,8 @@ Entrega da base saneada.</textarea>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6 col-12">
-                                    <label for="comousemnota">Conciliação</label>
-                                    <select class="form-control" id="comousemnota" required>
-                                        <option value="naopossui" selected>Não foi solicitado</option>
-                                        <option value="comnota">Com Nota</option>
-                                        <option value="semnota">Sem Nota</option>
-                                    </select>
+                                    <label for="comousemnota">Conciliação (R$)</label>
+                                    <input type="text" class="form-control reais" id="comousemnota" placeholder="" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -409,6 +377,34 @@ Entrega da base saneada.</textarea>
                             <div class="form-group col-md-3 col-12">
                                 <label for="margemdelucro">Margem de Lucro (%)</label>
                                 <input type="text" class="form-control percentual" id="margemdelucro" placeholder="Margem de Lucro" readonly>
+                            </div>
+                        </div>
+                        <div class="mini-card">
+                            <p class="font-weight-bold">Outras informações</p>
+                            <div class="row">
+                                <div class="form-group col-md-4 col-12">
+                                    <label for="diasAposPag">Dias para Pagarmento após início do Inventário</label>
+                                    <input type="text" class="form-control" id="diasAposPag" placeholder="Dias" required>
+                                    <small class="text-muted" id="infoDiasAposPag"></small>
+                                </div>
+                                <div class="form-group col-md-4 col-12">
+                                    <label for="diasEntregaLaudoFinal">Prazo para Entrega do Laudo Final</label>
+                                    <input type="text" class="form-control" id="diasEntregaLaudoFinal" placeholder="Valor total inventariante" required>
+                                    <small class="text-muted" id="infoDiasEntregaLaudoFinal"></small>
+                                </div>
+                                <div class="form-group col-md-4 col-12">
+                                    <label for="incluitranslado">Esta proposta contempla os gastos com
+                                        traslados?</label>
+                                    <select class="form-control" id="incluitranslado" required>
+                                        <option disabled selected>Selecione</option>
+                                        <option value="sim">Sim</option>
+                                        <option value="não">Não</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-12">
+                                    <label for="enderecoGai">Endereço da empresa</label>
+                                    <input type="text" class="form-control endereco" id="enderecoGai" placeholder="Endereço" required>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -656,21 +652,7 @@ Entrega da base saneada.</textarea>
                 $("#mdr").val(numeral(mdr).format('$0,0.00'))
                 $("#coorev").val(numeral(coorev).format('$0,0.00'))
 
-                var cosn0 = $("#comousemnota").val()
-
-                var cosn = 0
-
-                switch (cosn0) {
-                    case "naopossui":
-                        cosn = 0
-                        break;
-                    case "comnota":
-                        cosn = 5000
-                        break;
-                    case "semnota":
-                        cosn = 2500
-                        break;
-                }
+                var cosn = numeral($("#comousemnota").val()).value()
 
                 var total = valor + cosn + aavj + tdi + rvucpc27 + mdr + coorev + numeral($("#layoutcarga").val()).value() + numeral($("#outroscustos").val()).value() + numeral($("#alimentacaotransporte").val()).value()
 
@@ -686,13 +668,13 @@ Entrega da base saneada.</textarea>
 
                 var percom0 = $("#origemvenda").val() == null ? 0 : ($("#origemvenda").val() == "comercial1" ? 0.08 : 0.04)
 
-                var comissao = customarkup * percom0
-
-                $("#comissao").val(numeral(comissao).format('$0,0.00'))
-
-                var custservico = customarkup + custoback + comissao
+                var custservico = customarkup + custoback
 
                 $("#valordosservicos").val(numeral(custservico).format('$0,0.00'))
+
+                var comissao = custservico * percom0
+
+                $("#comissao").val(numeral(comissao).format('$0,0.00'))
 
                 var tximp = 0
 
