@@ -1,3 +1,11 @@
+$(function() {
+	var check = $.cookie('logado');
+	if (check!="true")
+	{
+		window.location.replace("http://plataforma.grupoinvestor.com/login.html");		
+	}	
+});
+
 $("body").delegate("#newPropose", "click", function() {
     navegar("novaProposta")
 })
@@ -125,16 +133,6 @@ $(function() {
         }
     });
 }));
-
-
-$(function() {
-	var check = $.cookie('logado');
-	if (check!="true")
-	{
-		window.location.replace("http://plataforma.grupoinvestor.com/login.html");		
-	}	
-});
-
 
 function logout() {
 	$.removeCookie('logado');
