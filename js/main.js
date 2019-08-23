@@ -28,8 +28,8 @@
 					$.cookie('setor',data['setor']);
 					$.cookie('cargo',data['cargo']);
 					//Redireciona para a pagina principal
-					//window.location.replace("https://plataforma.grupoinvestor.com/");
-					window.location.replace("teste.html");
+					window.location.replace("https://plataforma.grupoinvestor.com/");
+					
 				} else {
 					console.log("login invalido");
 					$(".error").text("Login Inválido");
