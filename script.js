@@ -143,8 +143,14 @@ function logout() {
 
 
 
-$(document).on("ready", function() {
+function nomeusuario() {
     $(".nomeUsuario").each(function(x) {
         $($(".nomeUsuario")[x]).html($.cookie('nome'))
     })
+}
+
+$(function() {
+    var time = setInterval(() => {
+        nomeusuario()
+    }, 100);
 })
