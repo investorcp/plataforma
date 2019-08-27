@@ -145,12 +145,25 @@ function logout() {
 
 function nomeusuario() {
     $(".nomeUsuario").each(function(x) {
-        $($(".nomeUsuario")[x]).html($.cookie('nome'))
+        $($("#nomeUsuario")[x]).html($.cookie('nome'))
     })
 }
 
+function preenchidoUs() {
+    var bu = true
+    $(".nomeUsuario").each(function(x) {
+        bu = bu && ($($("#nomeUsuario")[x]).html() != "")
+        console.log("dentro de preen " + bu)
+    })
+    return bu
+}
 $(function() {
     var time = setInterval(() => {
         nomeusuario()
+        console.log("aaa")
+        console.log($.cookie('nome'))
     }, 100);
+    if (preenchidoUs()) {
+        clearInterval(time)
+    }
 })
