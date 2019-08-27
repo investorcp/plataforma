@@ -140,3 +140,10 @@ function logout() {
     $.removeCookie('cargo');
     location.reload();
 }
+
+
+$(function() {
+    $(".nomeUsuario").each(function(x) {
+        $($(".nomeUsuario")[x]).html($.cookie('nome'))
+    })
+})
