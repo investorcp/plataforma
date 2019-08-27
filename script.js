@@ -145,7 +145,7 @@ function logout() {
 
 function nomeusuario() {
     $(".nomeUsuario").each(function(x) {
-        $($("#nomeUsuario")[x]).html($.cookie('nome'))
+        $($(".nomeUsuario")[x]).html($.cookie('nome'))
     })
 }
 
