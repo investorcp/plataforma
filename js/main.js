@@ -1,4 +1,14 @@
-(function($) {
+$(function() {
+    var url = window.location.href
+    var htt = url.split(":")
+    var ht0 = (htt[1]).split(".")
+    if (htt[0] == "http" && ht0[0] == "//plataforma") {
+        var u0 = url.replace("http", "https")
+        window.location.href = u0
+    }
+})
+
+$(function($) {
     "use strict";
 
 
