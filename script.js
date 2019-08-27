@@ -152,7 +152,7 @@ function nomeuser() {
 function preenchidoUs() {
     var bu = true
     $(".nomeUsuario").each(function(x) {
-        bu = bu && ($($("#nomeUsuario")[x]).html() != "")
+        bu = bu && ($($(".nomeUsuario")[x]).html() != "")
         console.log("dentro de preen " + bu)
     })
     return bu
