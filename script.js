@@ -142,7 +142,8 @@ function logout() {
 }
 
 
-$(function() {
+
+$(document).on("ready", function() {
     $(".nomeUsuario").each(function(x) {
         $($(".nomeUsuario")[x]).html($.cookie('nome'))
     })
