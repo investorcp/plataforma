@@ -143,7 +143,7 @@ function logout() {
 
 
 
-function nomeusuario() {
+function nomeuser() {
     $(".nomeUsuario").each(function(x) {
         $($(".nomeUsuario")[x]).html($.cookie('nome'))
     })
@@ -159,7 +159,7 @@ function preenchidoUs() {
 }
 $(function() {
     var time = setInterval(() => {
-        nomeusuario()
+        nomeuser()
         console.log("aaa")
         console.log($.cookie('nome'))
     }, 100);
