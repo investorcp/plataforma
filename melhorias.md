@@ -1,13 +1,15 @@
 # Para melhoria desse trabalho ainda falta adicionar algumas coisas:
 
-    + Adicionar uma forma de adicionar Prospects direto do Pipe direto da API
++ Prontos:
 
-    + Adicionar, Remover e Alterar Usuário
+    - Adicionar uma forma de adicionar Prospects direto do Pipe direto da API
 
-    + Atualizar Senha
+    - Adicionar, Remover e Alterar Usuário
 
-    + Adicionar uma forma de adicionar proposta pelo código. Apenas para devs
+    - Atualizar Senha
 
-    + Adicionar tela de visualização de todas as propostas
+    - Adicionar uma forma de adicionar proposta pelo código. Apenas para devs
 
-    + Montagem dos gráficos para tela inicial e para outras duas telas
+    - Adicionar tela de visualização de todas as propostas
+
+    - Montagem dos gráficos para tela inicial e para outras duas telas
